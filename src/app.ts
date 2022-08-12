@@ -1,4 +1,6 @@
 import express from 'express';
+import ingredientsRoutes from './routes/ingredientsRoutes';
+
 
 class App {
   public app: express.Express;
@@ -19,6 +21,8 @@ class App {
 
     this.app.use(accessControl);
     this.app.use(express.json());
+
+    this.app.use('/ingredients', ingredientsRoutes);
   }
 
   public start(PORT: string | number): void {
