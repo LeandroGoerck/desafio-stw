@@ -1,4 +1,5 @@
 import express from 'express';
+import errorMiddleware from './middlewares/errorMiddleware';
 import ingredientsRoutes from './routes/ingredientsRoutes';
 
 
@@ -23,6 +24,8 @@ class App {
     this.app.use(express.json());
 
     this.app.use('/ingredients', ingredientsRoutes);
+
+    this.app.use(errorMiddleware);
   }
 
   public start(PORT: string | number): void {

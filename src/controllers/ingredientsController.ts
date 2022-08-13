@@ -26,4 +26,38 @@ export default class IngredientsController {
       next(error);
     }
   }
+
+  public getById = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      console.log("getById")
+      const { id } = req.params;
+      const ingredientFound = await this.service.getById(id as string);
+
+      return res.status(200).json(ingredientFound);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  public updateById = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { id, codigoIngrediente, descricaoIngrediente } = req.body;
+      const updatedIngredient = await this.service.updateById(id as string, {codigoIngrediente, descricaoIngrediente});
+
+      return res.status(200).json(updatedIngredient);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  public deleteById = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { id } = req.body;
+      const deletedData = await this.service.deleteById(id as string);
+
+      return res.status(200).json(deletedData);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
