@@ -1,6 +1,7 @@
 import express from 'express';
 import errorMiddleware from './middlewares/errorMiddleware';
 import ingredientsRoutes from './routes/ingredientsRoutes';
+import recipesRoutes from './routes/recipesRoutes';
 
 
 class App {
@@ -24,6 +25,7 @@ class App {
     this.app.use(express.json());
 
     this.app.use('/ingredients', ingredientsRoutes);
+    this.app.use('/recipes', recipesRoutes);
 
     this.app.use(errorMiddleware);
   }
