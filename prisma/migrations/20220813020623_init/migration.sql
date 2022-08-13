@@ -1,23 +1,27 @@
 -- CreateTable
 CREATE TABLE `receitas` (
-    `codigo_receita` INTEGER NOT NULL AUTO_INCREMENT,
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `codigo_receita` VARCHAR(191) NOT NULL,
     `descricao_receita` VARCHAR(191) NOT NULL,
 
-    PRIMARY KEY (`codigo_receita`)
+    UNIQUE INDEX `receitas_codigo_receita_key`(`codigo_receita`),
+    PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `ingredientes` (
-    `codigo_ingrediente` INTEGER NOT NULL AUTO_INCREMENT,
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `codigo_ingrediente` VARCHAR(191) NOT NULL,
     `descricao_ingrediente` VARCHAR(191) NOT NULL,
 
-    PRIMARY KEY (`codigo_ingrediente`)
+    UNIQUE INDEX `ingredientes_codigo_ingrediente_key`(`codigo_ingrediente`),
+    PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `receitas_tem_ingredientes` (
-    `receitas_codigo_receita` INTEGER NOT NULL,
-    `ingredientes_codigo_ingrediente` INTEGER NOT NULL,
+    `receitas_codigo_receita` VARCHAR(191) NOT NULL,
+    `ingredientes_codigo_ingrediente` VARCHAR(191) NOT NULL,
     `ordem` INTEGER NOT NULL,
     `previsto` INTEGER NOT NULL,
 

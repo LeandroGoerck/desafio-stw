@@ -12,29 +12,31 @@ datasource db {
 
 
 model Receitas {
-  codigo_receita                  Int                 @id @default(autoincrement())
-  descricao_receita               String
+  id                             Int                  @id @default(autoincrement())
+  codigoReceita                  String               @map("codigo_receita") @unique
+  descricaoReceita               String                                             @map("descricao_receita")
   ingredientes ReceitasTemIngredientes[]
 
-    @@map("receitas")
+  @@map("receitas")
 }
 
 model Ingredientes {
-  codigo_ingrediente              Int                 @id @default(autoincrement())
-  descricao_ingrediente           String
+  id                             Int                 @id @default(autoincrement())
+  codigoIngrediente              String              @map("codigo_ingrediente") @unique
+  descricaoIngrediente           String              @map("descricao_ingrediente")
   receitas ReceitasTemIngredientes[]
 
   @@map("ingredientes")
 }
 
 model ReceitasTemIngredientes {
-  receitas       Receitas         @relation(fields: [receitas_codigo_receita], references: [codigo_receita])
-  receitas_codigo_receita         Int // relation scalar field (used in the `@relation` attribute above)
-  ingredientes   Ingredientes     @relation(fields: [ingredientes_codigo_ingrediente], references: [codigo_ingrediente])
-  ingredientes_codigo_ingrediente Int // relation scalar field (used in the `@relation` attribute above)
+  receitas                        Receitas         @relation(fields: [receitasCodigoReceita], references: [codigoReceita]) 
+  receitasCodigoReceita           String              @map("receitas_codigo_receita")// relation scalar field (used in the `@relation` attribute above) 
+  ingredientes                    Ingredientes     @relation(fields: [ingredientesCodigoIngrediente], references: [codigoIngrediente])
+  ingredientesCodigoIngrediente   String              @map("ingredientes_codigo_ingrediente")// relation scalar field (used in the `@relation` attribute above)
   ordem                           Int
   previsto                        Int
 
-  @@id([receitas_codigo_receita, ingredientes_codigo_ingrediente])
+  @@id([receitasCodigoReceita, ingredientesCodigoIngrediente])
   @@map("receitas_tem_ingredientes")
 }

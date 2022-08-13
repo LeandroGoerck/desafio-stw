@@ -1,9 +1,8 @@
+import { prismaClient } from "../database/prismaClient";
+
 export default class IngredientsService {
   public getAll = async () => {
-    const ingredientsData = {
-      codigo: 2235,
-      descricao: "Milho de teste",
-    }
+    const ingredientsData = await prismaClient.ingredientes.findMany();
     return { ingredientsData };
   };
 }
