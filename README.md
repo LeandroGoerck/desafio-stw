@@ -22,6 +22,7 @@ Com as seguintes funcionalidades:
 Passso-a-passo
   - [x] Modelar o banco no MySQL Workbench
   - [x] Configurar o express com typescript
+  - [x] Instalar o prisma e criar as migrations
 
   ## Modelagem do banco de dados
 

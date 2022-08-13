@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Receitas {
+  codigo_receita                  Int                 @id @default(autoincrement())
+  descricao_receita               String
+  ingredientes ReceitasTemIngredientes[]
+
+    @@map("receitas")
+}
+
+model Ingredientes {
+  codigo_ingrediente              Int                 @id @default(autoincrement())
+  descricao_ingrediente           String
+  receitas ReceitasTemIngredientes[]
+
+  @@map("ingredientes")
+}
+
+model ReceitasTemIngredientes {
+  receitas       Receitas         @relation(fields: [receitas_codigo_receita], references: [codigo_receita])
+  receitas_codigo_receita         Int // relation scalar field (used in the `@relation` attribute above)
+  ingredientes   Ingredientes     @relation(fields: [ingredientes_codigo_ingrediente], references: [codigo_ingrediente])
+  ingredientes_codigo_ingrediente Int // relation scalar field (used in the `@relation` attribute above)
+  ordem                           Int
+  previsto                        Int
+
+  @@id([receitas_codigo_receita, ingredientes_codigo_ingrediente])
+  @@map("receitas_tem_ingredientes")
+}
