@@ -14,15 +14,17 @@ Com as seguintes funcionalidades:
   - [ ] Excluir uma receita
 
 2. Ingredientes
-  - [ ] Listar os ingredientes
-  - [ ] Adicionar um novo ingrediente
-  - [ ] Atualizar um ingrediente
-  - [ ] Excluir um ingrediente
+  - [x] Listar os ingredientes
+  - [x] Adicionar um novo ingrediente
+  - [x] Atualizar um ingrediente
+  - [x] Excluir um ingrediente
 
 Passso-a-passo
   - [x] Modelar o banco no MySQL Workbench
   - [x] Configurar o express com typescript
   - [x] Instalar o prisma e criar as migrations
+  - [x] Cadastrar itens iniciais para teste
+  - [x] Criar CRUD de ingredientes
 
   ## Modelagem do banco de dados
 
