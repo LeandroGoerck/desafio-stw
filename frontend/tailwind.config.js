@@ -12,6 +12,7 @@ module.exports = {
         az4: '#16577E',
         br1: '#E3E3E3',
         cz1: '#AAADAE',
+        cz2: '#D9D9D9',
       }
     },
   },
