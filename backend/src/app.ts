@@ -2,6 +2,7 @@ import express from 'express';
 import errorMiddleware from './middlewares/errorMiddleware';
 import ingredientsRoutes from './routes/ingredientsRoutes';
 import recipesRoutes from './routes/recipesRoutes';
+import cors from 'cors';
 
 
 class App {
@@ -22,6 +23,7 @@ class App {
     };
 
     this.app.use(accessControl);
+    this.app.use(cors());
     this.app.use(express.json());
 
     this.app.use('/ingredients', ingredientsRoutes);
