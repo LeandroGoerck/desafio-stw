@@ -6,7 +6,7 @@ export default function NavBar() {
       <div className="bg-white h">
         <img className="h-16" src="stw.svg" alt="stw logo"></img>
       </div>
-      <div class="triangle"></div>
+      <div className="triangle"></div>
     </nav>
   );
 }

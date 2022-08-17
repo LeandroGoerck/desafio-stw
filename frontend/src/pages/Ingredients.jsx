@@ -1,10 +1,70 @@
-import React from 'react';
+import React, { useState } from 'react';
 import NavBar from '../components/NavBar';
 import IngredientsTable from '../components/IngredientsTable';
-import { FilePlus } from "phosphor-react";
+import IngredientsForm from '../components/IngredientsForm';
+import api from '../helpers/request';
+import { useEffect } from 'react';
 
 
 function Ingredients() {
+  const [ingredients, setIngredients] = useState([
+    {
+      id: 1,
+      codigoIngrediente: "5698",
+      descricaoIngrediente: "Milho",
+    },
+  ]);
+
+  const [form, setFormValue] = useState(
+    {
+      codigoIngrediente: "",
+      descricaoIngrediente: "",
+    }
+  );
+
+  const handleChanges = (e) => {
+    const { name, value } = e.target;
+
+    setFormValue((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }))
+  }
+
+  useEffect(() => {
+    api.get('/ingredients')
+      .then(({ data }) => {
+        setIngredients(data.ingredientsData);
+      })
+  
+  }, [])
+
+const removeIngredient = (value) => {
+  api
+    .delete('/ingredients', {data: {id: value}})
+    .then(() => {
+      api
+        .get('/ingredients')
+        .then(({ data }) => setIngredients(data.ingredientsData));
+    });
+};
+  
+
+  const handleAddButton = async () => {
+    api
+      .post('/ingredients', form)
+      .then((returnedMessage) => {
+        if (returnedMessage.status === 201) {
+          api
+            .get('/ingredients')
+            .then(({ data }) => {
+              setIngredients(data.ingredientsData);
+              setFormValue((prevState) => ({ ...prevState, descricaoIngrediente: "",  codigoIngrediente: ""}));
+            });
+        }
+      });
+  };  
+
   return (
     <div className="w-full h-full">
       <div className="md:m-14 shadow-lg h-full">
@@ -13,28 +73,9 @@ function Ingredients() {
         <div className="flex flex-col items-center justify-center">
           <div className="mt-14 mb-14  md:m-14 w-full md:w-2/3 flex flex-col items-center">
             <span >CADASTRO DE INGREDIENTES</span>
-            <div className="h-14 w-full mt-5 mb-5 bg-az1 flex flex-row items-center">
-              <input
-                type="text"
-                placeholder="Código"
-                className="m-2 h-8 pl-1 w-1/4 rounded-sm"
-              >
-              </input>
-              <input
-                type="text"                
-                placeholder="Descrição"
-                className="h-8 pl-1 w-2/4 rounded-sm"
-              >
-              </input>
-              <button
-                type="button"
-                className="h-10 w-10 bg-white ml-2 rounded-full flex flex-row items-center justify-center"
-              >
-                <FilePlus size={28}/>
-              </button>
-            </div>
+            <IngredientsForm form={form} handleChanges={handleChanges} handleAddButton={handleAddButton}/>
             <div className="h-full w-full bg-cz2 flex flex-col items-center">
-              <IngredientsTable />
+              <IngredientsTable ingredients={ingredients} removeIngredient={removeIngredient}/>
             </div>
           </div>
         </div>
