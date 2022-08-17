@@ -25,6 +25,21 @@ Passso-a-passo
   - [x] Instalar o prisma e criar as migrations
   - [x] Cadastrar itens iniciais para teste
   - [x] Criar CRUD de ingredientes
+  - [x] Configurar o cors
+  -Frontend
+  - [x] Criar aplicação basica react
+  - [x] Instalar e configurar Tailwindcss
+
+  - [x] Configurar rota /ingredients
+  - [x] Criar tela de cadastro de ingredientes
+  - [x] Configurar formulario de cadastro de ingredientes
+  - [x] Ao abrir a página os ingredientes devem aparecer na tabela
+  - [x] Adicionar função ao botão de adicionar ingrediente
+  - [x] Adicionar função ao botão de excluir ingrediente
+  - [ ] Adicionar função ao botão de editar ingrediente
+
+  - [ ] Configurar rota /recipes
+  - [ ] Configurar formulario de cadastro de receitas
 
   ## Modelagem do banco de dados
 
