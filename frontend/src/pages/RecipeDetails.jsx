@@ -37,17 +37,14 @@ function RecipeDetails() {
   useEffect(() => {
     api.get(`/recipes/${recipeId}`).then(({ data }) => {
       setRecipe(data.recipeFound);
-      console.log(data.recipeFound.codigoReceita)
+      console.log(data.recipeFound.codigoReceita);
 
       setFormValue((prevState) => ({
         ...prevState,
         codigoReceita: data.recipeFound.codigoReceita,
       }));
-
-
-    });   
+    });
   }, [recipeId]);
-
 
   const removeRecipe = (value) => {
     api.delete("/recipes", { data: { id: value } }).then(() => {
@@ -69,7 +66,7 @@ function RecipeDetails() {
       }
     });
   };
-  
+
   return (
     <div className="w-full h-full">
       <div className="md:m-14 shadow-lg h-full">
@@ -85,19 +82,24 @@ function RecipeDetails() {
               handleChanges={handleChanges}
               handleAddButton={handleAddButton}
             />
-            <div className="h-full w-full bg-white flex flex-col items-center">
-              <div className="flex flex-row">
-                <div className="mt-2 ml-2 mr-2 text-xl">
-                  Código: {recipe.codigoReceita}
+            {recipe && (
+              <div className="h-full w-full bg-white flex flex-col items-center">
+                <div className="flex flex-row">
+                  <div className="mt-2 ml-2 mr-2 text-xl">
+                    Código: {recipe.codigoReceita}
+                  </div>
+                  <div className="mt-2 ml-2 mr-2 text-xl">
+                    Descrição: {recipe.descricaoReceita}
+                  </div>
                 </div>
-                <div className="mt-2 ml-2 mr-2 text-xl">
-                  Descrição: {recipe.descricaoReceita}
-                </div>
-              </div>
-              <div className="mt-2 ml-2 mr-2 text-xl">Ingredientes</div>
+                <div className="mt-2 ml-2 mr-2 text-xl">Ingredientes</div>
 
-              <RecipesTable recipeIngredients={recipe.ingredientes} removeRecipe={removeRecipe} />
-            </div>
+                <RecipesTable
+                  recipeIngredients={recipe.ingredientes}
+                  removeRecipe={removeRecipe}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -14,7 +14,6 @@ function Recipes() {
     },
   ]);
 
-
   const [form, setFormValue] = useState({
     codigoReceita: "",
     descricaoReceita: "",
@@ -70,19 +69,24 @@ function Recipes() {
               handleChanges={handleChanges}
               handleAddButton={handleAddButton}
             />
-            <div className="h-full w-full bg-white flex flex-col items-center">
-              <div className="flex flex-row">
-                <div className="mt-2 ml-2 mr-2 text-xl">
-                  Código: {recipes[0].codigoReceita}
+            {recipes && (
+              <div className="h-full w-full bg-white flex flex-col items-center">
+                <div className="flex flex-row">
+                  <div className="mt-2 ml-2 mr-2 text-xl">
+                    Código: {recipes[0].codigoReceita}
+                  </div>
+                  <div className="mt-2 ml-2 mr-2 text-xl">
+                    Descrição: {recipes[0].descricaoReceita}
+                  </div>
                 </div>
-                <div className="mt-2 ml-2 mr-2 text-xl">
-                  Descrição: {recipes[0].descricaoReceita}
-                </div>
-              </div>
-              <div className="mt-2 ml-2 mr-2 text-xl">Ingredientes</div>
+                <div className="mt-2 ml-2 mr-2 text-xl">Ingredientes</div>
 
-              <RecipesTable ingredients={recipes[0].ingredientes} removeRecipe={removeRecipe} />
-            </div>
+                <RecipesTable
+                  ingredients={recipes[0].ingredientes}
+                  removeRecipe={removeRecipe}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
