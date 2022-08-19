@@ -23,7 +23,7 @@ export default class RecipesService {
       // {include: { ingredientes: true} });
       // {include: { ingredientes: {select: {ingredientes:true}} }});
       // {include: { ingredientes: {select: { ingredientesCodigoIngrediente:true , ordem:true, previsto:true, ingredientes:{select: { descricaoIngrediente:true }}}} }});
-      {include: { ingredientes: {select: { ordem:true, previsto:true, ingredientes:{select: { id: true, codigoIngrediente:true, descricaoIngrediente:true }}}} }});
+      {include: { ingredientes: {select: { id:true, ordem:true, previsto:true, ingredientes:{select: { id: true, codigoIngrediente:true, descricaoIngrediente:true }}}} }});
       //  { select: { id:true, codigoReceita:true, descricaoReceita:true, ingredientes: true}} );
     return { recipesData };
   };
@@ -31,7 +31,7 @@ export default class RecipesService {
   public getById = async (id: string) => {
     console.log(id);
     const recipeFound = await prismaClient.receitas.findFirst({
-      where: { id: parseInt(id) }, include: { ingredientes: {select: { ordem:true, previsto:true, ingredientes:{select: { id: true, codigoIngrediente:true, descricaoIngrediente:true }}}} }
+      where: { id: parseInt(id) }, include: { ingredientes: {select: { id: true, ordem:true, previsto:true, ingredientes:{select: { id: true, codigoIngrediente:true, descricaoIngrediente:true }}}} }
     });
     return { recipeFound };
   };
@@ -62,7 +62,7 @@ export default class RecipesService {
 
   public addIngredient = async (ingredient: IAddIngredient) => {
     const {receitasCodigoReceita, ingredientesCodigoIngrediente, previsto, ordem} = ingredient;
-    const recipesData = await prismaClient.receitasTemIngredientes.create({
+    const ingredientData = await prismaClient.receitasTemIngredientes.create({
       data: {
         receitasCodigoReceita,
         ingredientesCodigoIngrediente,
@@ -70,7 +70,14 @@ export default class RecipesService {
         ordem,
       },
     });
-    return { recipesData };
+    return { ingredientData };
+  };
+
+  public removeIngredient = async (id:  number ) => {
+    const removedIngredient = await prismaClient.receitasTemIngredientes.delete({
+      where: { id },
+    });
+    return { removedIngredient };
   };
 }
 

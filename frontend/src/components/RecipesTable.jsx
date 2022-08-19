@@ -3,7 +3,7 @@ import { NotePencil, Trash } from "phosphor-react";
 
 
 export default function RecipesTable(props) {
-  const { recipeIngredients, removeRecipe } = props;
+  const { recipeIngredients, handleRemoveIngredientButton } = props;
   return (
     <table className="table-fixed w-full md:w-fit border-2 border-az3 p-2 mt-5 mb-5">
       <thead>
@@ -40,7 +40,7 @@ export default function RecipesTable(props) {
               </button>
               <button
                 type="button"
-                onClick={() => removeRecipe(ing.id)}
+                onClick={() => handleRemoveIngredientButton(ing.id)}
               >
                 <Trash size={22} className="ml-2 mr-2" />
               </button>

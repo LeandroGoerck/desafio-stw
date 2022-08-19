@@ -15,13 +15,14 @@ function RecipeDetails() {
       id: 1,
       codigoReceita: "58964",
       descricaoReceita: "Ração crescimento inicial",
+      ordem: 0
     },
   ]);
 
   const [form, setFormValue] = useState({
     receitasCodigoReceita: "58964",
     ingredientesCodigoIngrediente: "5698",
-    previsto: 100,
+    previsto: 0,
     ordem: 1
   });
 
@@ -35,6 +36,23 @@ function RecipeDetails() {
       [name]: value,
     }));
   };
+  
+  useEffect(() => {
+    console.log('recipe',recipe)
+    let nextOrdem = 1;
+    if (recipe.ingredientes?.length > 0){
+      nextOrdem =  getIngredientsMaxOrdemValue(recipe.ingredientes) +1;
+    } else {
+      nextOrdem = 1;
+    }
+      console.log('nextOrdem', nextOrdem)
+      setFormValue((prevState) => ({
+        ...prevState,
+        ordem: nextOrdem,
+      }));
+    
+}, [recipe])
+
 
   useEffect(() => {
     api.get(`/recipes/${recipeId}`).then(({ data }) => {
@@ -46,18 +64,33 @@ function RecipeDetails() {
         codigoReceita: data.recipeFound.codigoReceita,
       }));
     });
-  }, [recipeId, recipe]);
+  }, [recipeId]);
 
-  const removeRecipe = (value) => {
-    api.delete("/recipes", { data: { id: value } }).then(() => {
-      api.get("/recipes").then(({ data }) => setRecipe(data.recipesData));
+  const handleRemoveIngredientButton = async (id) => {
+    console.log("delete ingredient id", id);
+    api.delete("/recipes/ingredient", {data: {id}}).then((returnedMessage) => {
+      if (returnedMessage.status === 200) {
+        api.get(`/recipes/${recipeId}`).then(({ data }) => {
+          setRecipe(data.recipeFound);
+        });
+      }
     });
   };
+
+  function getIngredientsMaxOrdemValue(args) {
+    console.log('args', args)
+
+    const max= args.reduce((prev, cur) => {
+        return prev.ordem > cur.ordem ? prev.ordem : cur.ordem;
+    },[]);
+    return max;
+
+}
 
   const handleAddIngredientButton = async () => {
     api.post("/recipes/ingredient", form).then((returnedMessage) => {
       if (returnedMessage.status === 201) {
-        api.get("/recipes").then(({ data }) => {
+        api.get(`/recipes/${recipeId}`).then(({ data }) => {
           setRecipe(data.recipeFound);
         });
       }
@@ -93,7 +126,7 @@ function RecipeDetails() {
 
                 <RecipesTable
                   recipeIngredients={recipe.ingredientes}
-                  removeRecipe={removeRecipe}
+                  handleRemoveIngredientButton={handleRemoveIngredientButton}
                 />
               </div>
             )}
