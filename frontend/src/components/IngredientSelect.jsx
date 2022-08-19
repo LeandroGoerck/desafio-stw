@@ -7,7 +7,7 @@ export default function IngredientSelect(props) {
     <div className="flex justify-center">
       <div className="xl:w-96">
         <select
-          name="codigoIngrediente"
+          name="ingredientesCodigoIngrediente"
           onChange={handleChanges}
           className="form-select block py-1.5 px-3 font-normal text-gray-700
                    bg-white bg-clip-padding bg-no-repeat border border-solid

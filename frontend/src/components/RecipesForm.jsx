@@ -4,7 +4,7 @@ import api from "../helpers/request";
 import IngredientSelect from "./IngredientSelect";
 
 export default function RecipesForm(props) {
-  const { handleChanges, form, recipeId} = props;
+  const { handleChanges, handleAddIngredientButton, form } = props;
   const [ingredients, setIngredients] = useState([]);
 
   useEffect(() => {
@@ -31,9 +31,7 @@ export default function RecipesForm(props) {
         <button
           type="button"
           className="h-10 w-10 bg-white ml-2 rounded-full flex flex-row items-center justify-center disabled:bg-cz1"
-          onClick={() => {
-            console.log(recipeId, form.descricaoIngrediente )
-          }}
+          onClick={handleAddIngredientButton}
           disabled={false}
           >
           <FilePlus size={28} />

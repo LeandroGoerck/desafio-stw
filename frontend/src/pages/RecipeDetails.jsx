@@ -19,15 +19,17 @@ function RecipeDetails() {
   ]);
 
   const [form, setFormValue] = useState({
-    codigoIngrediente: "",
-    previsto: "",
-    codigoReceita: "",
-    ordem: 5,
+    receitasCodigoReceita: "58964",
+    ingredientesCodigoIngrediente: "5698",
+    previsto: 100,
+    ordem: 1
   });
 
   const handleChanges = (e) => {
-    const { name, value } = e.target;
-
+    let { name, value } = e.target;
+    if (name === "previsto") {
+      value = parseInt(value);
+    }
     setFormValue((prevState) => ({
       ...prevState,
       [name]: value,
@@ -44,7 +46,7 @@ function RecipeDetails() {
         codigoReceita: data.recipeFound.codigoReceita,
       }));
     });
-  }, [recipeId]);
+  }, [recipeId, recipe]);
 
   const removeRecipe = (value) => {
     api.delete("/recipes", { data: { id: value } }).then(() => {
@@ -52,16 +54,11 @@ function RecipeDetails() {
     });
   };
 
-  const handleAddButton = async () => {
-    api.post("/recipes", form).then((returnedMessage) => {
+  const handleAddIngredientButton = async () => {
+    api.post("/recipes/ingredient", form).then((returnedMessage) => {
       if (returnedMessage.status === 201) {
         api.get("/recipes").then(({ data }) => {
-          setRecipe(data.recipesData);
-          setFormValue((prevState) => ({
-            ...prevState,
-            descricaoIngrediente: "",
-            codigoIngrediente: "",
-          }));
+          setRecipe(data.recipeFound);
         });
       }
     });
@@ -80,7 +77,7 @@ function RecipeDetails() {
               recipeId={recipeId}
               form={form}
               handleChanges={handleChanges}
-              handleAddButton={handleAddButton}
+              handleAddIngredientButton={handleAddIngredientButton}
             />
             {recipe && (
               <div className="h-full w-full bg-white flex flex-col items-center">
