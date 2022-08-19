@@ -38,6 +38,5 @@ model ReceitasTemIngredientes {
   ordem                           Int
   previsto                        Int
 
-  // @@id([receitasCodigoReceita, ingredientesCodigoIngrediente])
   @@map("receitas_tem_ingredientes")
 }
