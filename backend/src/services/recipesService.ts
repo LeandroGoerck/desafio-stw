@@ -1,8 +1,8 @@
-import { connect } from "http2";
+import IAddIngredient from "../interfaces/IAddIngredient";
 import { prismaClient } from "../database/prismaClient";
-import IRecipe from "../interfaces/IRecipe";
 import ICreateRecipe from "../interfaces/ICreateRecipe";
 import ERR from './errors';
+// import IAddIngredient from "../interfaces/IAddIngredient";
 
 export default class RecipesService {
 
@@ -20,16 +20,20 @@ export default class RecipesService {
 
   public getAll = async () => {
     const recipesData = await prismaClient.receitas.findMany(
-      {include: { ingredientes: {select: {ingredientesCodigoIngrediente:true , ordem:true, previsto:true}} }});
+      // {include: { ingredientes: true} });
+      // {include: { ingredientes: {select: {ingredientes:true}} }});
+      // {include: { ingredientes: {select: { ingredientesCodigoIngrediente:true , ordem:true, previsto:true, ingredientes:{select: { descricaoIngrediente:true }}}} }});
+      {include: { ingredientes: {select: { ordem:true, previsto:true, ingredientes:{select: { id: true, codigoIngrediente:true, descricaoIngrediente:true }}}} }});
+      //  { select: { id:true, codigoReceita:true, descricaoReceita:true, ingredientes: true}} );
     return { recipesData };
   };
 
   public getById = async (id: string) => {
     console.log(id);
-    const ingredientFound = await prismaClient.receitas.findFirst({
-      where: { id: parseInt(id) }, include: {ingredientes: {select: {ingredientesCodigoIngrediente:true, ordem:true, previsto:true}}}
+    const recipeFound = await prismaClient.receitas.findFirst({
+      where: { id: parseInt(id) }, include: { ingredientes: {select: { ordem:true, previsto:true, ingredientes:{select: { id: true, codigoIngrediente:true, descricaoIngrediente:true }}}} }
     });
-    return { ingredientFound };
+    return { recipeFound };
   };
 
   public updateById = async (id: string, recipe: ICreateRecipe) => {
@@ -55,4 +59,19 @@ export default class RecipesService {
     });
     return { deletedData };
   };
+
+  public addIngredient = async (ingredient: IAddIngredient) => {
+    const {receitasCodigoReceita, ingredientesCodigoIngrediente, previsto, ordem} = ingredient;
+    const recipesData = await prismaClient.receitasTemIngredientes.create({
+      data: {
+        receitasCodigoReceita,
+        ingredientesCodigoIngrediente,
+        previsto,
+        ordem,
+      },
+    });
+    return { recipesData };
+  };
 }
+
+

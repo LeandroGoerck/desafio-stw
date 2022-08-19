@@ -30,6 +30,7 @@ model Ingredientes {
 }
 
 model ReceitasTemIngredientes {
+  id                              Int                  @id @default(autoincrement())
   receitas                        Receitas         @relation(fields: [receitasCodigoReceita], references: [codigoReceita]) 
   receitasCodigoReceita           String              @map("receitas_codigo_receita")// relation scalar field (used in the `@relation` attribute above) 
   ingredientes                    Ingredientes     @relation(fields: [ingredientesCodigoIngrediente], references: [codigoIngrediente])
@@ -37,6 +38,6 @@ model ReceitasTemIngredientes {
   ordem                           Int
   previsto                        Int
 
-  @@id([receitasCodigoReceita, ingredientesCodigoIngrediente])
+  // @@id([receitasCodigoReceita, ingredientesCodigoIngrediente])
   @@map("receitas_tem_ingredientes")
 }

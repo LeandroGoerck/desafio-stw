@@ -59,4 +59,15 @@ export default class RecipesController {
       next(error);
     }
   }
+
+  public addIngredient = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const {receitasCodigoReceita, ingredientesCodigoIngrediente, previsto, ordem} = req.body;
+      const createdRecipes = await this.service.addIngredient({receitasCodigoReceita, ingredientesCodigoIngrediente, previsto, ordem});
+
+      return res.status(201).json(createdRecipes);
+    } catch (error) {
+      next(error);
+    }
+  }  
 }
