@@ -1,16 +1,14 @@
 import React from "react";
-import { NotePencil, Trash } from "phosphor-react";
+import { NotePencil, Trash, Eye } from "phosphor-react";
+import { Link } from "react-router-dom";
 
 
 export default function RecipesTable(props) {
-  const { recipeIngredients, handleRemoveIngredientButton } = props;
+  const { recipesList, removeRecipe } = props;
   return (
-    <table className="table-fixed w-full md:w-fit border-2 border-az3 p-2 mt-5 mb-5">
+    <table className="table-fixed w-full border-2 border-az3 p-2 mt-5 mb-5">
       <thead>
         <tr>
-          <th className="md:pl-10 md:pr-10 xl:pl-20 xl:pr-20 pt-2 pb-2 text-center">
-            Ordem
-          </th>
           <th className="md:pl-10 md:pr-10 xl:pl-20 xl:pr-20 pt-2 pb-2 text-center">
             Código
           </th>
@@ -18,29 +16,33 @@ export default function RecipesTable(props) {
             Descrição
           </th>
           <th className="md:pl-10 md:pr-10 xl:pl-20 xl:pr-20 pt-2 pb-2 text-center">
-            Previsto em kg
-          </th>
-          <th className="md:pl-10 md:pr-10 xl:pl-20 xl:pr-20 pt-2 pb-2 text-center">
             Opções
           </th>
         </tr>
       </thead>
       <tbody className="border-2 border-az3">
-        {recipeIngredients && recipeIngredients.sort((ingA,ingB) => (ingA.ordem - ingB.ordem)).map((ing, index) => (
-          <tr key={`${ing.id}${index}`} className="text-center items-center border ">
-            <td className="pt-2 pb-2">{ing.ordem}</td>
-            <td className="pt-2 pb-2">{ing.ingredientes.codigoIngrediente}</td>
-            <td className="pt-2 pb-2">{ing.ingredientes.descricaoIngrediente}</td>
-            <td className="pt-2 pb-2">{ing.previsto}</td>
+        {recipesList && recipesList.map((recipe, index) => (
+          <tr key={`${recipe.id}${index}`} className="text-center items-center border ">
+            <td className="pt-2 pb-2">{recipe.codigoReceita}</td>
+            <td className="pt-2 pb-2">{recipe.descricaoReceita}</td>
             <td className="pt-2 pb-2 flex flex-row justify-center">
+
+              <Link
+                to={`/recipes/${recipe.id}`}
+              
+                >
+                <Eye size={22} className="ml-2 mr-2" />
+              </Link>
+
               <button
                 type="button"
               >
                 <NotePencil size={22} className="ml-2 mr-2" />
               </button>
+
               <button
                 type="button"
-                onClick={() => handleRemoveIngredientButton(ing.id)}
+                onClick={() => removeRecipe(recipe.id)}
               >
                 <Trash size={22} className="ml-2 mr-2" />
               </button>
