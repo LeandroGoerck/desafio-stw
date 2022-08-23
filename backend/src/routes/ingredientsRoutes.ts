@@ -9,7 +9,7 @@ const router = express.Router();
 router.post('/', ingredientsController.create);
 router.get('/', ingredientsController.getAll);
 router.get('/:id', ingredientsController.getById);
-router.put('/', ingredientsController.updateById);
+router.put('/:id', ingredientsController.updateById);
 router.delete('/', ingredientsController.deleteById);
 
 export default router;
