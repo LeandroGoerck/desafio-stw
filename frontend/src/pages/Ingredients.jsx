@@ -59,6 +59,21 @@ const removeIngredient = (value) => {
             .get('/ingredients')
             .then(({ data }) => {
               setIngredients(data.ingredientsData);
+            });
+        }
+      });
+  };  
+
+  const handleEditButton = async (ingredientId) => {
+    
+    api
+      .put(`/ingredients/${ingredientId}`, form)
+      .then((returnedMessage) => {
+        if (returnedMessage.status === 200) {
+          api
+            .get('/ingredients')
+            .then(({ data }) => {
+              setIngredients(data.ingredientsData);
               setFormValue((prevState) => ({ ...prevState, descricaoIngrediente: "",  codigoIngrediente: ""}));
             });
         }
@@ -83,7 +98,18 @@ const removeIngredient = (value) => {
               handleAddButton={handleAddButton}
             />
             <div className="h-full w-full bg-cz2 flex flex-col items-center">
-              <IngredientsTable ingredients={ingredients} removeIngredient={removeIngredient}/>
+              <IngredientsTable
+                ingredients={ingredients}
+                setFormValue={setFormValue}
+                removeIngredient={removeIngredient}
+                inputCodeName="codigoIngrediente"
+                inputCodeValue={form.codigoIngrediente}
+                inputDescriptionName="descricaoIngrediente"
+                inputDescriptionValue={form.descricaoIngrediente}
+                handleChanges={handleChanges}
+                handleAddButton={handleAddButton}
+                handleEditButton={handleEditButton}
+              />
             </div>
           </div>
         </div>
