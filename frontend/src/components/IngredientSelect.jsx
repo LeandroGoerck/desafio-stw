@@ -4,8 +4,8 @@ export default function IngredientSelect(props) {
   const { ingredients, handleChanges } = props;
 
   return (
-    <div className="flex justify-center">
-      <div className="xl:w-96">
+    <div>
+      <div>
         <select
           name="ingredientesCodigoIngrediente"
           onChange={handleChanges}
@@ -14,6 +14,7 @@ export default function IngredientSelect(props) {
                    border-gray-300 rounded transition mx-2 focus:text-az4
                    focus:bg-white focus:border-blue-600 focus:outline-none"
           >
+            <option value={null} ></option>
            {ingredients.length && ingredients.map((ing) => (
              <option key={ing.id} value={ing.codigoIngrediente}>{`${ing.codigoIngrediente}  ${ing.descricaoIngrediente}`}</option>
            ))} 
