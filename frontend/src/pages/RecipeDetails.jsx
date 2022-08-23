@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import NavBar from "../components/NavBar";
-import RecipesTable from "../components/RecipesTable";
-import RecipesForm from "../components/RecipesForm";
+import RecipeWithIngredientsTable from "../components/RecipeWithIngredientsTable";
+import AddIngredientToRecipeForm from "../components/AddIngredientToRecipeForm";
 import api from "../helpers/request";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-function RecipeDetails() {
+export default function RecipeDetails() {
   const { id } = useParams();
   const recipeId = parseInt(id);
 
@@ -20,8 +20,8 @@ function RecipeDetails() {
   ]);
 
   const [form, setFormValue] = useState({
-    receitasCodigoReceita: "58964",
-    ingredientesCodigoIngrediente: "5698",
+    receitasCodigoReceita: "",
+    ingredientesCodigoIngrediente: "",
     previsto: 0,
     ordem: 1
   });
@@ -49,6 +49,7 @@ function RecipeDetails() {
       setFormValue((prevState) => ({
         ...prevState,
         ordem: nextOrdem,
+        receitasCodigoReceita: recipe.codigoReceita
       }));
     
 }, [recipe])
@@ -104,9 +105,9 @@ function RecipeDetails() {
 
         <div className="flex flex-col items-center justify-center">
           <div className="mt-14 mb-14   w-full md:w-2/3 flex flex-col items-center">
-            <span>DETALHES DA RECEITA</span>
+            <span>CADASTRO DE ETAPAS DA RECEITA</span>
             <span>{recipeId}</span>
-            <RecipesForm
+            <AddIngredientToRecipeForm
               recipeId={recipeId}
               form={form}
               handleChanges={handleChanges}
@@ -124,7 +125,7 @@ function RecipeDetails() {
                 </div>
                 <div className="mt-2 ml-2 mr-2 text-xl">Ingredientes</div>
 
-                <RecipesTable
+                <RecipeWithIngredientsTable
                   recipeIngredients={recipe.ingredientes}
                   handleRemoveIngredientButton={handleRemoveIngredientButton}
                 />
@@ -136,5 +137,3 @@ function RecipeDetails() {
     </div>
   );
 }
-
-export default RecipeDetails;

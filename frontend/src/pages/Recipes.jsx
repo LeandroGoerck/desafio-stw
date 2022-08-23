@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NavBar from "../components/NavBar";
 import RecipesTable from "../components/RecipesTable";
-import RecipesForm from "../components/RecipesForm";
+import CodeAndDescriptionForm from "../components/CodeAndDescriptionForm";
 import api from "../helpers/request";
 import { useEffect } from "react";
 
@@ -64,25 +64,19 @@ function Recipes() {
         <div className="flex flex-col items-center justify-center">
           <div className="mt-14 mb-14  md:m-14 w-full md:w-2/3 flex flex-col items-center">
             <span>CADASTRO DE RECEITAS</span>
-            <RecipesForm
+            <CodeAndDescriptionForm
               form={form}
+              inputCodeName="codigoReceita"
+              inputCodeValue={form.codigoReceita}
+              inputDescriptionName="descricaoReceita"
+              inputDescriptionValue={form.descricaoReceita}
               handleChanges={handleChanges}
               handleAddButton={handleAddButton}
             />
             {recipes && (
               <div className="h-full w-full bg-white flex flex-col items-center">
-                <div className="flex flex-row">
-                  <div className="mt-2 ml-2 mr-2 text-xl">
-                    Código: {recipes[0].codigoReceita}
-                  </div>
-                  <div className="mt-2 ml-2 mr-2 text-xl">
-                    Descrição: {recipes[0].descricaoReceita}
-                  </div>
-                </div>
-                <div className="mt-2 ml-2 mr-2 text-xl">Ingredientes</div>
-
                 <RecipesTable
-                  ingredients={recipes[0].ingredientes}
+                  recipesList={recipes}
                   removeRecipe={removeRecipe}
                 />
               </div>
