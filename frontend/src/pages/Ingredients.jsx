@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import NavBar from '../components/NavBar';
 import IngredientsTable from '../components/IngredientsTable';
-import IngredientsForm from '../components/IngredientsForm';
+import CodeAndDescriptionForm from '../components/CodeAndDescriptionForm';
 import api from '../helpers/request';
 import { useEffect } from 'react';
 
@@ -73,7 +73,15 @@ const removeIngredient = (value) => {
         <div className="flex flex-col items-center justify-center">
           <div className="mt-14 mb-14  md:m-14 w-full md:w-2/3 flex flex-col items-center">
             <span >CADASTRO DE INGREDIENTES</span>
-            <IngredientsForm form={form} handleChanges={handleChanges} handleAddButton={handleAddButton}/>
+            <CodeAndDescriptionForm
+              form={form}
+              inputCodeName="codigoIngrediente"
+              inputCodeValue={form.codigoIngrediente}
+              inputDescriptionName="descricaoIngrediente"
+              inputDescriptionValue={form.descricaoIngrediente}
+              handleChanges={handleChanges}
+              handleAddButton={handleAddButton}
+            />
             <div className="h-full w-full bg-cz2 flex flex-col items-center">
               <IngredientsTable ingredients={ingredients} removeIngredient={removeIngredient}/>
             </div>
