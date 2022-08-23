@@ -29,7 +29,6 @@ export default class IngredientsController {
 
   public getById = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      console.log("getById")
       const { id } = req.params;
       const ingredientFound = await this.service.getById(id as string);
 
@@ -41,7 +40,8 @@ export default class IngredientsController {
 
   public updateById = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { id, codigoIngrediente, descricaoIngrediente } = req.body;
+      const { id } = req.params;
+      const { codigoIngrediente, descricaoIngrediente } = req.body;
       const updatedIngredient = await this.service.updateById(id as string, {codigoIngrediente, descricaoIngrediente});
 
       return res.status(200).json(updatedIngredient);
