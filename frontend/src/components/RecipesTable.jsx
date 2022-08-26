@@ -8,8 +8,6 @@ export default function RecipesTable(props) {
   const handleViewEditButton = (recipeId, newRecipeData) => {
     if (editRecipe === 0) {
       setEditRecipe(recipeId);
-      console.log(recipeId);
-      // setFormValue(newIngredientData);
     }
   };
 

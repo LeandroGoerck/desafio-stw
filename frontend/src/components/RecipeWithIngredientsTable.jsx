@@ -19,7 +19,6 @@ export default function RecipeWithIngredientsTable(props) {
         ...editRecipeIngredientData,
       }));
 
-      console.log(recipeIngredientId);
     }
   };
 

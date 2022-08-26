@@ -31,7 +31,6 @@ function Recipes() {
   useEffect(() => {
     api.get("/recipes").then(({ data }) => {
       setRecipes(data.recipesData);
-      console.log(data.recipesData);
     });
   }, []);
 
