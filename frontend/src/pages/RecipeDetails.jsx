@@ -113,6 +113,16 @@ export default function RecipeDetails() {
     });
   };
 
+  const handleSwapIngredientsButton = async (ingredients) => {
+    api.put(`/recipes/ingredient/`, ingredients).then((returnedMessage) => {
+      if (returnedMessage.status === 200) {
+        api.get(`/recipes/${recipeId}`).then(({ data }) => {
+          setRecipe(data.recipeFound);
+        });
+      }
+    });
+  };
+
   return (
     <div className="w-full h-full">
       <div className="md:m-14 shadow-lg h-full">
@@ -149,6 +159,7 @@ export default function RecipeDetails() {
                   editRecipeIngredient={editRecipeIngredient}
                   setRecipeEditIngredient={setRecipeEditIngredient}
                   setFormValue={setFormValue}
+                  handleSwapIngredientsButton={handleSwapIngredientsButton}
                 />
               </div>
             )}

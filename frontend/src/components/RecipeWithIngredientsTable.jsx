@@ -1,8 +1,12 @@
 import React from "react";
-import { ArrowFatLineDown, ArrowFatLineUp, RadioButton, Trash } from "phosphor-react";
+import {
+  ArrowFatLineDown,
+  ArrowFatLineUp,
+  RadioButton,
+  Trash,
+} from "phosphor-react";
 
 export default function RecipeWithIngredientsTable(props) {
-
   const handleViewEditButton = (
     recipeIngredientId,
     editRecipeIngredientData
@@ -15,8 +19,7 @@ export default function RecipeWithIngredientsTable(props) {
         ...editRecipeIngredientData,
       }));
 
-
-      console.log(recipeIngredientId)
+      console.log(recipeIngredientId);
     }
   };
 
@@ -25,7 +28,8 @@ export default function RecipeWithIngredientsTable(props) {
     handleRemoveIngredientButton,
     editRecipeIngredient,
     setRecipeEditIngredient,
-    setFormValue
+    setFormValue,
+    handleSwapIngredientsButton,
   } = props;
   return (
     <table className="table-fixed w-full md:w-fit border-2 border-az3 p-2 mt-5 mb-5">
@@ -55,7 +59,9 @@ export default function RecipeWithIngredientsTable(props) {
             .map((ing, index) => (
               <tr
                 key={`${ing.id}${index}`}
-                className={`${editRecipeIngredient === ing.id && ("bg-az1")} text-center items-center border`}>
+                className={`${
+                  editRecipeIngredient === ing.id && "bg-az1"
+                } text-center items-center border`}>
                 <td>
                   <span className="pt-2 pb-2">{ing.ordem}</span>
                 </td>
@@ -75,21 +81,49 @@ export default function RecipeWithIngredientsTable(props) {
                 </td>
 
                 <td className="pt-2 pb-2 flex flex-row justify-center">
+                  {index > 0 && (
+                    <button
+                      type="button"
+                      className="h-fit w-fit ml-2 mr-2"
+                      onClick={() => {
+                        const ingredients = [
+                          {
+                            id: ing.id,
+                            ordem: recipeIngredients[index - 1].ordem,
+                          },
+                          {
+                            id: recipeIngredients[index - 1].id,
+                            ordem: ing.ordem,
+                          },
+                        ];
 
-                  <button
-                    type="button"
-                    className="h-fit w-fit ml-2 mr-2"
-                    >
-                    <ArrowFatLineUp />
-                  </button>
+                        handleSwapIngredientsButton(ingredients);
+                      }}>
+                      <ArrowFatLineUp size={22} />
+                    </button>
+                  )}
 
-                  <button
-                    type="button"
-                    className="h-fit w-fit ml-2 mr-2"
-                    >
-                    <ArrowFatLineDown />
-                  </button>
+                  {index < (recipeIngredients.length - 1) && (
+                    <button
+                      type="button"
+                      className="h-fit w-fit ml-2 mr-2"
+                      onClick={() => {
+                        const ingredients = [
+                          {
+                            id: ing.id,
+                            ordem: recipeIngredients[index + 1].ordem,
+                          },
+                          {
+                            id: recipeIngredients[index + 1].id,
+                            ordem: ing.ordem,
+                          },
+                        ];
 
+                        handleSwapIngredientsButton(ingredients);
+                      }}>
+                      <ArrowFatLineDown size={22} />
+                    </button>
+                  )}
 
                   {ing.id === editRecipeIngredient ? (
                     <button
@@ -99,7 +133,7 @@ export default function RecipeWithIngredientsTable(props) {
                         setRecipeEditIngredient(0);
                         // handleEditButton(ing.id);
                       }}>
-                      <RadioButton size={22} weight="fill"/>
+                      <RadioButton size={22} weight="fill" />
                     </button>
                   ) : (
                     <button
@@ -107,12 +141,13 @@ export default function RecipeWithIngredientsTable(props) {
                       className="h-fit w-fit ml-2 mr-2"
                       onClick={() =>
                         handleViewEditButton(ing.id, {
-                          ingredientesCodigoIngrediente: ing.ingredientes.codigoIngrediente,
+                          ingredientesCodigoIngrediente:
+                            ing.ingredientes.codigoIngrediente,
                           previsto: ing.previsto,
                           ordem: ing.ordem,
                         })
                       }>
-                      <RadioButton size={22}/>
+                      <RadioButton size={22} />
                     </button>
                   )}
 
