@@ -42,14 +42,12 @@ export default function RecipeDetails() {
   };
   
   useEffect(() => {
-    console.log('recipe',recipe)
     let nextOrdem = 1;
     if (recipe.ingredientes?.length > 0){
       nextOrdem =  getIngredientsMaxOrdemValue(recipe.ingredientes) +1;
     } else {
       nextOrdem = 1;
     }
-      console.log('nextOrdem', nextOrdem)
       setFormValue((prevState) => ({
         ...prevState,
         ordem: nextOrdem,
@@ -62,7 +60,6 @@ export default function RecipeDetails() {
   useEffect(() => {
     api.get(`/recipes/${recipeId}`).then(({ data }) => {
       setRecipe(data.recipeFound);
-      console.log(data.recipeFound.codigoReceita);
 
       setFormValue((prevState) => ({
         ...prevState,
@@ -72,7 +69,6 @@ export default function RecipeDetails() {
   }, [recipeId]);
 
   const handleRemoveIngredientButton = async (id) => {
-    console.log("delete ingredient id", id);
     api.delete("/recipes/ingredient", {data: {id}}).then((returnedMessage) => {
       if (returnedMessage.status === 200) {
         api.get(`/recipes/${recipeId}`).then(({ data }) => {
@@ -83,8 +79,6 @@ export default function RecipeDetails() {
   };
 
   function getIngredientsMaxOrdemValue(args) {
-    console.log('args', args)
-
     const max= args.reduce((prev, cur) => {
         return prev.ordem > cur.ordem ? prev.ordem : cur.ordem;
     },[]);
