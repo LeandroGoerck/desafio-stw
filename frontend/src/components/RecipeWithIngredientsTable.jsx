@@ -1,9 +1,32 @@
 import React from "react";
-import { NotePencil, Trash } from "phosphor-react";
-
+import { ArrowFatLineDown, ArrowFatLineUp, RadioButton, Trash } from "phosphor-react";
 
 export default function RecipeWithIngredientsTable(props) {
-  const { recipeIngredients, handleRemoveIngredientButton } = props;
+
+  const handleViewEditButton = (
+    recipeIngredientId,
+    editRecipeIngredientData
+  ) => {
+    if (editRecipeIngredient === 0) {
+      setRecipeEditIngredient(recipeIngredientId);
+
+      setFormValue((prevState) => ({
+        ...prevState,
+        ...editRecipeIngredientData,
+      }));
+
+
+      console.log(recipeIngredientId)
+    }
+  };
+
+  const {
+    recipeIngredients,
+    handleRemoveIngredientButton,
+    editRecipeIngredient,
+    setRecipeEditIngredient,
+    setFormValue
+  } = props;
   return (
     <table className="table-fixed w-full md:w-fit border-2 border-az3 p-2 mt-5 mb-5">
       <thead>
@@ -26,27 +49,81 @@ export default function RecipeWithIngredientsTable(props) {
         </tr>
       </thead>
       <tbody className="border-2 border-az3">
-        {recipeIngredients && recipeIngredients.sort((ingA,ingB) => (ingA.ordem - ingB.ordem)).map((ing, index) => (
-          <tr key={`${ing.id}${index}`} className="text-center items-center border ">
-            <td className="pt-2 pb-2">{ing.ordem}</td>
-            <td className="pt-2 pb-2">{ing.ingredientes.codigoIngrediente}</td>
-            <td className="pt-2 pb-2">{ing.ingredientes.descricaoIngrediente}</td>
-            <td className="pt-2 pb-2">{ing.previsto}</td>
-            <td className="pt-2 pb-2 flex flex-row justify-center">
-              <button
-                type="button"
-              >
-                <NotePencil size={22} className="ml-2 mr-2" />
-              </button>
-              <button
-                type="button"
-                onClick={() => handleRemoveIngredientButton(ing.id)}
-              >
-                <Trash size={22} className="ml-2 mr-2" />
-              </button>
-            </td>
-          </tr>
-        ))}
+        {recipeIngredients &&
+          recipeIngredients
+            .sort((ingA, ingB) => ingA.ordem - ingB.ordem)
+            .map((ing, index) => (
+              <tr
+                key={`${ing.id}${index}`}
+                className={`${editRecipeIngredient === ing.id && ("bg-az1")} text-center items-center border`}>
+                <td>
+                  <span className="pt-2 pb-2">{ing.ordem}</span>
+                </td>
+
+                <td className="flex flex-box justify-center">
+                  <span className="pt-2 pb-2">
+                    {ing.ingredientes.codigoIngrediente}
+                  </span>
+                </td>
+
+                <td className="pt-2 pb-2">
+                  {ing.ingredientes.descricaoIngrediente}
+                </td>
+
+                <td>
+                  <span className="pt-2 pb-2">{ing.previsto}</span>
+                </td>
+
+                <td className="pt-2 pb-2 flex flex-row justify-center">
+
+                  <button
+                    type="button"
+                    className="h-fit w-fit ml-2 mr-2"
+                    >
+                    <ArrowFatLineUp />
+                  </button>
+
+                  <button
+                    type="button"
+                    className="h-fit w-fit ml-2 mr-2"
+                    >
+                    <ArrowFatLineDown />
+                  </button>
+
+
+                  {ing.id === editRecipeIngredient ? (
+                    <button
+                      type="button"
+                      className="h-fit w-fit ml-2 mr-2"
+                      onClick={() => {
+                        setRecipeEditIngredient(0);
+                        // handleEditButton(ing.id);
+                      }}>
+                      <RadioButton size={22} weight="fill"/>
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="h-fit w-fit ml-2 mr-2"
+                      onClick={() =>
+                        handleViewEditButton(ing.id, {
+                          ingredientesCodigoIngrediente: ing.ingredientes.codigoIngrediente,
+                          previsto: ing.previsto,
+                          ordem: ing.ordem,
+                        })
+                      }>
+                      <RadioButton size={22}/>
+                    </button>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveIngredientButton(ing.id)}>
+                    <Trash size={22} className="ml-2 mr-2" />
+                  </button>
+                </td>
+              </tr>
+            ))}
       </tbody>
     </table>
   );

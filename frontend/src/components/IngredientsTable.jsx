@@ -86,7 +86,7 @@ export default function IngredientsTable(props) {
                   <button
                     type="button"
                     className="h-fit w-fit ml-2 mr-2"
-                    onClick={(e) => handleViewEditButton(ing.id, {codigoIngrediente: ing.codigoIngrediente, descricaoIngrediente: ing.descricaoIngrediente})}>
+                    onClick={() => handleViewEditButton(ing.id, {codigoIngrediente: ing.codigoIngrediente, descricaoIngrediente: ing.descricaoIngrediente})}>
                     <NotePencil size={22} />
                   </button>
                 )}

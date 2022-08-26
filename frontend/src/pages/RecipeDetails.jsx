@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 export default function RecipeDetails() {
+  const [editRecipeIngredient, setRecipeEditIngredient] = useState(0);
   const { id } = useParams();
   const recipeId = parseInt(id);
 
@@ -30,6 +31,9 @@ export default function RecipeDetails() {
     let { name, value } = e.target;
     if (name === "previsto") {
       value = parseInt(value);
+      if (!value) {
+        value = 0
+      }
     }
     setFormValue((prevState) => ({
       ...prevState,
@@ -98,6 +102,17 @@ export default function RecipeDetails() {
     });
   };
 
+  const handleEditIngredientButton = async () => {
+    api.put(`/recipes/ingredient/${editRecipeIngredient}`, form).then((returnedMessage) => {
+      if (returnedMessage.status === 200) {
+        api.get(`/recipes/${recipeId}`).then(({ data }) => {
+          setRecipe(data.recipeFound);
+          setRecipeEditIngredient(0);
+        });
+      }
+    });
+  };
+
   return (
     <div className="w-full h-full">
       <div className="md:m-14 shadow-lg h-full">
@@ -112,6 +127,8 @@ export default function RecipeDetails() {
               form={form}
               handleChanges={handleChanges}
               handleAddIngredientButton={handleAddIngredientButton}
+              selectedIngredientToEdit={editRecipeIngredient}
+              handleEditIngredientButton={handleEditIngredientButton}
             />
             {recipe && (
               <div className="h-full w-full bg-white flex flex-col items-center">
@@ -127,7 +144,11 @@ export default function RecipeDetails() {
 
                 <RecipeWithIngredientsTable
                   recipeIngredients={recipe.ingredientes}
+                  inputCodeName="previsto"
                   handleRemoveIngredientButton={handleRemoveIngredientButton}
+                  editRecipeIngredient={editRecipeIngredient}
+                  setRecipeEditIngredient={setRecipeEditIngredient}
+                  setFormValue={setFormValue}
                 />
               </div>
             )}
