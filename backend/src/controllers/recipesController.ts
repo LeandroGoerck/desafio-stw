@@ -81,4 +81,16 @@ export default class RecipesController {
       next(error);
     }
   }  
+
+  public updateIngredientById = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { id } = req.params;
+      const {receitasCodigoReceita, ingredientesCodigoIngrediente, previsto, ordem} = req.body;
+      const updatedIngredient = await this.service.updateIngredient( parseInt(id), {receitasCodigoReceita, ingredientesCodigoIngrediente, previsto, ordem});
+
+      return res.status(200).json(updatedIngredient);
+    } catch (error) {
+      next(error);
+    }
+  }  
 }

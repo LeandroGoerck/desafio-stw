@@ -79,6 +79,21 @@ export default class RecipesService {
     });
     return { removedIngredient };
   };
+
+  public updateIngredient = async (id:  number, ingredient: IAddIngredient) => {
+    const {receitasCodigoReceita, ingredientesCodigoIngrediente, previsto, ordem} = ingredient;
+    const ingredientData = await prismaClient.receitasTemIngredientes.update({
+      where: { id },
+      data: {
+        receitasCodigoReceita,
+        ingredientesCodigoIngrediente,
+        previsto,
+        ordem,
+      },
+    });
+    return { ingredientData };
+  };
+
 }
 
 
