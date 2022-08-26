@@ -31,7 +31,7 @@ export default function RecipeWithIngredientsTable(props) {
     handleSwapIngredientsButton,
   } = props;
   return (
-    <table className="table-fixed w-full md:w-fit border-2 border-az3 p-2 mt-5 mb-5">
+    <table className="table-fixed w-full md:w-fit border-2 border-az3 p-2 mb-5">
       <thead>
         <tr>
           <th className="md:pl-10 md:pr-10 xl:pl-20 xl:pr-20 pt-2 pb-2 text-center">

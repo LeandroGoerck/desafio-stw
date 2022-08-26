@@ -16,7 +16,7 @@ export default function RecipeDetails() {
       id: 1,
       codigoReceita: "58964",
       descricaoReceita: "Ração crescimento inicial",
-      ordem: 0
+      ordem: 0,
     },
   ]);
 
@@ -24,7 +24,7 @@ export default function RecipeDetails() {
     receitasCodigoReceita: "",
     ingredientesCodigoIngrediente: "",
     previsto: 0,
-    ordem: 1
+    ordem: 1,
   });
 
   const handleChanges = (e) => {
@@ -32,7 +32,7 @@ export default function RecipeDetails() {
     if (name === "previsto") {
       value = parseInt(value);
       if (!value) {
-        value = 0
+        value = 0;
       }
     }
     setFormValue((prevState) => ({
@@ -40,22 +40,20 @@ export default function RecipeDetails() {
       [name]: value,
     }));
   };
-  
+
   useEffect(() => {
     let nextOrdem = 1;
-    if (recipe.ingredientes?.length > 0){
-      nextOrdem =  getIngredientsMaxOrdemValue(recipe.ingredientes) +1;
+    if (recipe.ingredientes?.length > 0) {
+      nextOrdem = getIngredientsMaxOrdemValue(recipe.ingredientes) + 1;
     } else {
       nextOrdem = 1;
     }
-      setFormValue((prevState) => ({
-        ...prevState,
-        ordem: nextOrdem,
-        receitasCodigoReceita: recipe.codigoReceita
-      }));
-    
-}, [recipe])
-
+    setFormValue((prevState) => ({
+      ...prevState,
+      ordem: nextOrdem,
+      receitasCodigoReceita: recipe.codigoReceita,
+    }));
+  }, [recipe]);
 
   useEffect(() => {
     api.get(`/recipes/${recipeId}`).then(({ data }) => {
@@ -69,22 +67,23 @@ export default function RecipeDetails() {
   }, [recipeId]);
 
   const handleRemoveIngredientButton = async (id) => {
-    api.delete("/recipes/ingredient", {data: {id}}).then((returnedMessage) => {
-      if (returnedMessage.status === 200) {
-        api.get(`/recipes/${recipeId}`).then(({ data }) => {
-          setRecipe(data.recipeFound);
-        });
-      }
-    });
+    api
+      .delete("/recipes/ingredient", { data: { id } })
+      .then((returnedMessage) => {
+        if (returnedMessage.status === 200) {
+          api.get(`/recipes/${recipeId}`).then(({ data }) => {
+            setRecipe(data.recipeFound);
+          });
+        }
+      });
   };
 
   function getIngredientsMaxOrdemValue(args) {
-    const max= args.reduce((prev, cur) => {
-        return prev.ordem > cur.ordem ? prev.ordem : cur.ordem;
-    },[]);
+    const max = args.reduce((prev, cur) => {
+      return prev.ordem > cur.ordem ? prev.ordem : cur.ordem;
+    }, []);
     return max;
-
-}
+  }
 
   const handleAddIngredientButton = async () => {
     api.post("/recipes/ingredient", form).then((returnedMessage) => {
@@ -97,14 +96,16 @@ export default function RecipeDetails() {
   };
 
   const handleEditIngredientButton = async () => {
-    api.put(`/recipes/ingredient/${editRecipeIngredient}`, form).then((returnedMessage) => {
-      if (returnedMessage.status === 200) {
-        api.get(`/recipes/${recipeId}`).then(({ data }) => {
-          setRecipe(data.recipeFound);
-          setRecipeEditIngredient(0);
-        });
-      }
-    });
+    api
+      .put(`/recipes/ingredient/${editRecipeIngredient}`, form)
+      .then((returnedMessage) => {
+        if (returnedMessage.status === 200) {
+          api.get(`/recipes/${recipeId}`).then(({ data }) => {
+            setRecipe(data.recipeFound);
+            setRecipeEditIngredient(0);
+          });
+        }
+      });
   };
 
   const handleSwapIngredientsButton = async (ingredients) => {
@@ -123,7 +124,7 @@ export default function RecipeDetails() {
         <NavBar />
 
         <div className="flex flex-col items-center justify-center">
-          <div className="mt-14 mb-14   w-full md:w-2/3 flex flex-col items-center">
+          <div className="mt-14 mb-14  w-full md:w-2/3 flex flex-col items-center">
             <span>CADASTRO DE ETAPAS DA RECEITA</span>
             <span>{recipeId}</span>
             <AddIngredientToRecipeForm
@@ -136,15 +137,34 @@ export default function RecipeDetails() {
             />
             {recipe && (
               <div className="h-full w-full bg-white flex flex-col items-center">
-                <div className="flex flex-row">
-                  <div className="mt-2 ml-2 mr-2 text-xl">
-                    Código: {recipe.codigoReceita}
-                  </div>
-                  <div className="mt-2 ml-2 mr-2 text-xl">
-                    Descrição: {recipe.descricaoReceita}
-                  </div>
-                </div>
-                <div className="mt-2 ml-2 mr-2 text-xl">Ingredientes</div>
+
+                <table className="table-fixed w-full md:w-fit border-2 border-az3 p-2 mt-5">
+                  <thead>
+                    <tr>
+                      <th className="md:pl-10 md:pr-10 xl:pl-20 xl:pr-20 pt-2 pb-2 text-center">
+                        Código da Receita
+                      </th>
+                      <th className="md:pl-10 md:pr-10 xl:pl-20 xl:pr-20 pt-2 pb-2 text-center">
+                        Descrição
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="border-2 border-az3">
+                    <tr className="text-center items-center border">
+                      
+                      <td>
+                        <span className="pt-2 pb-2">
+                          {recipe.codigoReceita}
+                        </span>
+                      </td>
+                      <td>
+                        <span className="pt-2 pb-2">
+                          {recipe.descricaoReceita}
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
 
                 <RecipeWithIngredientsTable
                   recipeIngredients={recipe.ingredientes}
