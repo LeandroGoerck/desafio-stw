@@ -80,11 +80,12 @@ export default function RecipeWithIngredientsTable(props) {
                   <span className="pt-2 pb-2">{ing.previsto}</span>
                 </td>
 
-                <td className="pt-2 pb-2 flex flex-row justify-center">
-                  {index > 0 && (
+                <td className="pt-2 pb-2 flex flex-row justify-end">
+
                     <button
                       type="button"
-                      className="h-fit w-fit ml-2 mr-2"
+                      className="h-fit w-fit ml-2 mr-2 disabled:text-cz1"
+                      disabled={index === 0 }
                       onClick={() => {
                         const ingredients = [
                           {
@@ -101,12 +102,12 @@ export default function RecipeWithIngredientsTable(props) {
                       }}>
                       <ArrowFatLineUp size={22} />
                     </button>
-                  )}
 
-                  {index < (recipeIngredients.length - 1) && (
+                  
                     <button
                       type="button"
-                      className="h-fit w-fit ml-2 mr-2"
+                      className="h-fit w-fit ml-2 mr-2 disabled:text-cz1"
+                      disabled={index === (recipeIngredients.length - 1) }
                       onClick={() => {
                         const ingredients = [
                           {
@@ -123,7 +124,7 @@ export default function RecipeWithIngredientsTable(props) {
                       }}>
                       <ArrowFatLineDown size={22} />
                     </button>
-                  )}
+                  
 
                   {ing.id === editRecipeIngredient ? (
                     <button
