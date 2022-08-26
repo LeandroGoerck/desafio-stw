@@ -92,5 +92,15 @@ export default class RecipesController {
     } catch (error) {
       next(error);
     }
+  }
+
+  public swapIngredients = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const swapedIngredients = await this.service.swapIngredients(req.body);
+
+      return res.status(200).json(swapedIngredients);
+    } catch (error) {
+      next(error);
+    }
   }  
 }

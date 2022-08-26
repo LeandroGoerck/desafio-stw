@@ -2,7 +2,7 @@ import IAddIngredient from "../interfaces/IAddIngredient";
 import { prismaClient } from "../database/prismaClient";
 import ICreateRecipe from "../interfaces/ICreateRecipe";
 import ERR from './errors';
-// import IAddIngredient from "../interfaces/IAddIngredient";
+import ISwapIngredient from "../interfaces/ISwapIngredient";
 
 export default class RecipesService {
 
@@ -92,6 +92,27 @@ export default class RecipesService {
       },
     });
     return { ingredientData };
+  };
+
+  public swapIngredients = async (ingredients: Array<ISwapIngredient>) => {
+
+    const updateFirst = prismaClient.receitasTemIngredientes.update({
+      where: { id: ingredients[0].id },
+      data: {
+        ordem: ingredients[0].ordem,
+      },
+    });
+
+    const updateSecond = prismaClient.receitasTemIngredientes.update({
+      where: { id: ingredients[1].id },
+      data: {
+        ordem: ingredients[1].ordem,
+      },
+    });
+
+    await prismaClient.$transaction([updateFirst, updateSecond])
+
+    return [updateFirst, updateSecond];
   };
 
 }
