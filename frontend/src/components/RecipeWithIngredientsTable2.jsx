@@ -11,7 +11,6 @@ export default function RecipeWithIngredientsTable(props) {
     recipeIngredientOrdem,
     editRecipeIngredientData
   ) => {
-    console.log(recipeIngredientOrdem)
     if (editRecipeIngredient === 0) {
       setRecipeEditIngredient(recipeIngredientOrdem);
 
@@ -19,7 +18,6 @@ export default function RecipeWithIngredientsTable(props) {
         ...prevState,
         ...editRecipeIngredientData,
       }));
-
     }
   };
 
@@ -65,7 +63,6 @@ export default function RecipeWithIngredientsTable(props) {
                 } text-center items-center border`}>
                 <td>
                   <span className="pt-2 pb-2">{ing.ordem}</span>
-                  {/* <span className="pt-2 pb-2">{index+1}</span> */}
                 </td>
 
                 <td className="flex flex-box justify-center">
@@ -75,7 +72,13 @@ export default function RecipeWithIngredientsTable(props) {
                 </td>
 
                 <td className="pt-2 pb-2">
-                  {ingredients.find(i => i.codigoIngrediente === ing.ingredientesCodigoIngrediente).descricaoIngrediente}
+                  {
+                    ingredients.find(
+                      (i) =>
+                        i.codigoIngrediente ===
+                        ing.ingredientesCodigoIngrediente
+                    ).descricaoIngrediente
+                  }
                 </td>
 
                 <td>
@@ -83,42 +86,33 @@ export default function RecipeWithIngredientsTable(props) {
                 </td>
 
                 <td className="pt-2 pb-2 flex flex-row justify-end">
+                  <button
+                    type="button"
+                    className="h-fit w-fit ml-2 mr-2 disabled:text-cz1"
+                    disabled={index === 0}
+                    onClick={() => {
+                      const ingredients = {
+                        actual: index + 1,
+                        target: index,
+                      };
+                      handleSwapIngredientsButton(ingredients);
+                    }}>
+                    <ArrowFatLineUp size={22} />
+                  </button>
 
-                    <button
-                      type="button"
-                      className="h-fit w-fit ml-2 mr-2 disabled:text-cz1"
-                      disabled={index === 0 }
-                      onClick={() => {
-                        const ingredients = 
-                          {
-                            actual: index+1,
-                            target: index,
-                          }
-                        ;
-
-                        handleSwapIngredientsButton(ingredients);
-                      }}>
-                      <ArrowFatLineUp size={22} />
-                    </button>
-
-                  
-                    <button
-                      type="button"
-                      className="h-fit w-fit ml-2 mr-2 disabled:text-cz1"
-                      disabled={index === (recipeIngredients.length - 1) }
-                      onClick={() => {
-                        const ingredients = 
-                          {
-                            actual: index+1,
-                            target: index+2,
-                          }
-                        ;
-
-                        handleSwapIngredientsButton(ingredients);
-                      }}>
-                      <ArrowFatLineDown size={22} />
-                    </button>
-                  
+                  <button
+                    type="button"
+                    className="h-fit w-fit ml-2 mr-2 disabled:text-cz1"
+                    disabled={index === recipeIngredients.length - 1}
+                    onClick={() => {
+                      const ingredients = {
+                        actual: index + 1,
+                        target: index + 2,
+                      };
+                      handleSwapIngredientsButton(ingredients);
+                    }}>
+                    <ArrowFatLineDown size={22} />
+                  </button>
 
                   {ing.ordem === editRecipeIngredient ? (
                     <button
@@ -126,7 +120,6 @@ export default function RecipeWithIngredientsTable(props) {
                       className="h-fit w-fit ml-2 mr-2"
                       onClick={() => {
                         setRecipeEditIngredient(0);
-                        // handleEditButton(ing.ordem);
                       }}>
                       <RadioButton size={22} weight="fill" />
                     </button>
@@ -135,14 +128,12 @@ export default function RecipeWithIngredientsTable(props) {
                       type="button"
                       className="h-fit w-fit ml-2 mr-2"
                       onClick={() =>
-                        handleViewEditButton(ing.ordem, 
-                          {
+                        handleViewEditButton(ing.ordem, {
                           ingredientesCodigoIngrediente:
-                          ing.ingredientesCodigoIngrediente,
+                            ing.ingredientesCodigoIngrediente,
                           previsto: ing.previsto,
                           ordem: ing.ordem,
-                        }
-                        )
+                        })
                       }>
                       <RadioButton size={22} />
                     </button>
@@ -160,4 +151,3 @@ export default function RecipeWithIngredientsTable(props) {
     </table>
   );
 }
-

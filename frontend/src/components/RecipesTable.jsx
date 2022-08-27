@@ -1,15 +1,8 @@
-import React, { useState } from "react";
-import { NotePencil, Trash, Eye, ArrowFatLineRight } from "phosphor-react";
+import React from "react";
+import { NotePencil, Trash, Eye } from "phosphor-react";
 import { Link } from "react-router-dom";
 
 export default function RecipesTable(props) {
-  const [editRecipe, setEditRecipe] = useState(0);
-
-  const handleViewEditButton = (recipeId, newRecipeData) => {
-    if (editRecipe === 0) {
-      setEditRecipe(recipeId);
-    }
-  };
 
   const { recipesList, removeRecipe } = props;
   return (
@@ -45,30 +38,6 @@ export default function RecipesTable(props) {
                 <Link to={`/create/${recipe.id}`}>
                   <NotePencil size={22} className="ml-2 mr-2" />
                 </Link>
-
-                {/* {recipe.id === editRecipe ? (
-                  <button
-                    type="button"
-                    className="h-fit w-fit ml-2 mr-2"
-                    onClick={() => {
-                      setEditRecipe(0);
-                      // handleEditButton(ing.id);
-                    }}>
-                    <ArrowFatLineRight size={22} />
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    className="h-fit w-fit ml-2 mr-2"
-                    onClick={() =>
-                      handleViewEditButton(recipe.id, {
-                        codigoReceita: recipe.codigoReceita,
-                        codigoIngrediente: recipe.codigoIngrediente,
-                      })
-                    }>
-                    <NotePencil size={22} />
-                  </button>
-                )} */}
 
                 <button type="button" onClick={() => removeRecipe(recipe.id)}>
                   <Trash size={22} className="ml-2 mr-2" />

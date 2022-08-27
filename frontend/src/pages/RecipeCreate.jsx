@@ -9,9 +9,10 @@ import { useParams } from "react-router-dom";
 
 export default function RecipeCreate() {
   const [editRecipeIngredient, setRecipeEditIngredient] = useState(0);
-  // const [recipeId, setRecipeId] = useState(0);
   const { id } = useParams();
-  const recipeId = parseInt(id);
+  const [recipeId, setRecipeId] = useState(parseInt(id) | 0);
+
+  const [recipeTemp, setRecipeTemp] = useState(0);
 
   const [recipe, setRecipe] = useState({
     codigoReceita: "",
@@ -37,39 +38,36 @@ export default function RecipeCreate() {
   const [form, setFormValue] = useState({
     ingredientesCodigoIngrediente: "",
     previsto: 0,
-    // ordem: 1,
   });
 
   useEffect(() => {
-    api.get(`/recipes/${recipeId}`).then(({ data }) => {
-      setRecipe(data.recipeFound);
-      console.log('ing', data.recipeFound.ingredientes)
+    if (recipeId > 0) {
+      api.get(`/recipes/${recipeId}`).then(({ data }) => {
+        setRecipeTemp(data.recipeFound)
+      });
+    } 
+  }, [recipeId]);
 
-      const formattedIngredients = [...data.recipeFound.ingredientes].map(
-        // ing => ({ing})
+  useEffect(() => {
+
+    if (recipeTemp) {
+      const formattedIngredients = [...recipeTemp.ingredientes].map(
         (ing) => ({
           ingredientesCodigoIngrediente: ing.ingredientes.codigoIngrediente,
           ordem: ing.ordem,
           previsto: ing.previsto,
+          id: ing.id
         })
       );
       console.log('formattedIngredients', formattedIngredients);
       setRecipeIngredients(formattedIngredients);
-
-    });
-  }, [recipeId]);
-
-
-  // const formatIngredientsToTable = () => {
-  //   const formattedIngredients = [...recipeIngredients].map(
-  //     (ing) => ({
-  //       ingredientesCodigoIngrediente: ing.ingredientes.codigoIngrediente,
-  //       ordem: ing.ordem,
-  //       previsto: ing.previsto,
-  //     })
-  //   );
-  //   setRecipeIngredients(formattedIngredients);
-  // }
+      setRecipe({
+        codigoReceita: recipeTemp.codigoReceita,
+        descricaoReceita: recipeTemp.descricaoReceita,
+      })
+    }
+        
+  }, [recipeTemp])
 
   const handleChanges = (e) => {
     let { name, value } = e.target;
@@ -94,32 +92,6 @@ export default function RecipeCreate() {
     }));
   };
 
-  // useEffect(() => {
-  //   let nextOrdem = 1;
-  //   if (recipeIngredients?.length > 0) {
-  //     nextOrdem = getIngredientsMaxOrdemValue(recipeIngredients) + 1;
-  //   } else {
-  //     nextOrdem = 1;
-  //   }
-
-  //   setFormValue((prevState) => ({
-  //     ...prevState,
-  //     ordem: nextOrdem,
-  //     // receitasCodigoReceita: recipe.codigoReceita,
-  //   }));
-
-  // }, [recipeIngredients]);
-
-  // useEffect(() => {
-  //   api.get(`/recipes/${recipeId}`).then(({ data }) => {
-  //     // setRecipe(data.recipeFound);
-
-  //     setFormValue((prevState) => ({
-  //       ...prevState,
-  //       codigoReceita: data.recipeFound.codigoReceita,
-  //     }));
-  //   });
-  // }, [recipeId]);
 
   const handleRemoveIngredientButton = async (ordem) => {
     setRecipeIngredients(recipeIngredients.filter((i) => i.ordem !== ordem));
@@ -131,6 +103,7 @@ export default function RecipeCreate() {
         ingredientesCodigoIngrediente: ing.ingredientesCodigoIngrediente,
         ordem: index + 1,
         previsto: ing.previsto,
+        id: ing.id,
       })
     );
     setRecipeIngredients(ingredientsInOrderSequence);
@@ -175,6 +148,7 @@ export default function RecipeCreate() {
         ingredientesCodigoIngrediente: ing.ingredientesCodigoIngrediente,
         ordem: index + 1,
         previsto: ing.previsto,
+        id: ing.id
       })
     );
 
@@ -188,18 +162,20 @@ export default function RecipeCreate() {
       ingredientes: recipeIngredients 
     }
 
-    api.post("/recipes", data).then((returnedMessage) => {
+    api.post(`/recipes/create/${recipeId}`, data).then((returnedMessage) => {
       if (returnedMessage.status === 201) {
         console.log(returnedMessage.data.recipesData.id);
-        const recipeId = returnedMessage.data.recipesData.id;
+        const receivedRecipeId =returnedMessage.data.recipesData.id;
+        
 
-        api.get(`/recipes/${recipeId}`).then(({ data }) => {
-          // setRecipe(data.recipeFound);
+        api.get(`/recipes/${receivedRecipeId}`).then(({ data }) => {
+          setRecipeTemp(data.recipeFound);
           console.log(data.recipeFound);
+          setRecipeId(receivedRecipeId)
         });
       }
     });
-
+    
   }
 
   return (
