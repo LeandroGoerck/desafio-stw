@@ -5,10 +5,13 @@ import api from "../helpers/request";
 import { useEffect } from "react";
 import AddIngredientToRecipeForm2 from "../components/AddIngredientToRecipeForm2";
 import { FloppyDisk } from "phosphor-react";
+import { useParams } from "react-router-dom";
 
 export default function RecipeCreate() {
   const [editRecipeIngredient, setRecipeEditIngredient] = useState(0);
-  const [recipeId, setRecipeId] = useState(0);
+  // const [recipeId, setRecipeId] = useState(0);
+  const { id } = useParams();
+  const recipeId = parseInt(id);
 
   const [recipe, setRecipe] = useState({
     codigoReceita: "",
@@ -36,6 +39,37 @@ export default function RecipeCreate() {
     previsto: 0,
     // ordem: 1,
   });
+
+  useEffect(() => {
+    api.get(`/recipes/${recipeId}`).then(({ data }) => {
+      setRecipe(data.recipeFound);
+      console.log('ing', data.recipeFound.ingredientes)
+
+      const formattedIngredients = [...data.recipeFound.ingredientes].map(
+        // ing => ({ing})
+        (ing) => ({
+          ingredientesCodigoIngrediente: ing.ingredientes.codigoIngrediente,
+          ordem: ing.ordem,
+          previsto: ing.previsto,
+        })
+      );
+      console.log('formattedIngredients', formattedIngredients);
+      setRecipeIngredients(formattedIngredients);
+
+    });
+  }, [recipeId]);
+
+
+  // const formatIngredientsToTable = () => {
+  //   const formattedIngredients = [...recipeIngredients].map(
+  //     (ing) => ({
+  //       ingredientesCodigoIngrediente: ing.ingredientes.codigoIngrediente,
+  //       ordem: ing.ordem,
+  //       previsto: ing.previsto,
+  //     })
+  //   );
+  //   setRecipeIngredients(formattedIngredients);
+  // }
 
   const handleChanges = (e) => {
     let { name, value } = e.target;

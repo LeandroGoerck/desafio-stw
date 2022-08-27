@@ -29,6 +29,13 @@ function RoutesApp() {
           />
           <Route
             exact
+            path="/create/:id"
+            element={
+                <RecipeCreate />
+            }
+          />
+          <Route
+            exact
             path="/recipes"
             element={
                 <Recipes />

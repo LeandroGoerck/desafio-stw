@@ -42,7 +42,11 @@ export default function RecipesTable(props) {
                   <Eye size={22} className="ml-2 mr-2" />
                 </Link>
 
-                {recipe.id === editRecipe ? (
+                <Link to={`/create/${recipe.id}`}>
+                  <NotePencil size={22} className="ml-2 mr-2" />
+                </Link>
+
+                {/* {recipe.id === editRecipe ? (
                   <button
                     type="button"
                     className="h-fit w-fit ml-2 mr-2"
@@ -64,7 +68,7 @@ export default function RecipesTable(props) {
                     }>
                     <NotePencil size={22} />
                   </button>
-                )}
+                )} */}
 
                 <button type="button" onClick={() => removeRecipe(recipe.id)}>
                   <Trash size={22} className="ml-2 mr-2" />
