@@ -17,4 +17,6 @@ router.delete('/ingredient', recipesController.removeIngredient);
 router.put('/ingredient/:id', recipesController.updateIngredientById);
 router.put('/ingredient/', recipesController.swapIngredients);
 
+router.post('/create/:id', recipesController.createOrUpdate);
+
 export default router;
