@@ -16,6 +16,9 @@ export default function NavBar() {
       <Link to="/ingredients">
         <span className="text-xl text-white ml-5 mr-5">INGREDIENTES</span>
       </Link>
+      <Link to="/create">
+        <span className="text-xl text-white ml-5 mr-5">CRIAÇÃO DE RECEITA</span>
+      </Link>
     </nav>
   );
 }
