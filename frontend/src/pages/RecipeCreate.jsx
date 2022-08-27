@@ -1,24 +1,19 @@
 import React, { useState } from "react";
 import NavBar from "../components/NavBar";
-import RecipeWithIngredientsTable2 from "../components/RecipeWithIngredientsTable";
-import AddIngredientToRecipeForm from "../components/AddIngredientToRecipeForm";
+import RecipeWithIngredientsTable2 from "../components/RecipeWithIngredientsTable2";
 import api from "../helpers/request";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
 import AddIngredientToRecipeForm2 from "../components/AddIngredientToRecipeForm2";
-import CodeAndDescriptionForm from "../components/CodeAndDescriptionForm";
+import { FloppyDisk } from "phosphor-react";
 
 export default function RecipeCreate() {
   const [editRecipeIngredient, setRecipeEditIngredient] = useState(0);
-  const { id } = useParams();
-  const recipeId = parseInt(id);
+  const [recipeId, setRecipeId] = useState(0);
 
-  const [recipe, setRecipe] = useState(
-    {
-      codigoReceita: "58964",
-      descricaoReceita: "Ração crescimento inicial",
-    },
-  );
+  const [recipe, setRecipe] = useState({
+    codigoReceita: "",
+    descricaoReceita: "",
+  });
 
   const [ingredients, setIngredients] = useState([]);
   useEffect(() => {
@@ -109,7 +104,6 @@ export default function RecipeCreate() {
   }, [recipeIngredients.length]);
 
   const handleAddIngredientButton = async () => {
-    // setRecipeIngredients((prevState) => [...prevState, form]);
     const updatedIngredientList = [...recipeIngredients];
     updatedIngredientList.push(form);
     setRecipeIngredients(updatedIngredientList);
@@ -153,10 +147,39 @@ export default function RecipeCreate() {
     setRecipeIngredients(ingredientsInOrderSequence);
   };
 
+  const handleSaveButton = () => {
+
+    const data = {
+      ...recipe,
+      ingredientes: recipeIngredients 
+    }
+
+    api.post("/recipes", data).then((returnedMessage) => {
+      if (returnedMessage.status === 201) {
+        console.log(returnedMessage.data.recipesData.id);
+        const recipeId = returnedMessage.data.recipesData.id;
+
+        api.get(`/recipes/${recipeId}`).then(({ data }) => {
+          // setRecipe(data.recipeFound);
+          console.log(data.recipeFound);
+        });
+      }
+    });
+
+  }
+
   return (
     <div className="w-full h-full">
-      <div className="md:m-14 shadow-lg h-full">
+      <div className="relative md:m-14 shadow-lg h-full">
         <NavBar />
+
+        <button
+          type="button"
+          className="absolute right-0 m-2"
+          onClick={handleSaveButton}
+        >
+          <FloppyDisk size={32}/>
+        </button>
 
         <div className="flex flex-col items-center justify-center">
           <div className="mt-14 mb-14  w-full md:w-2/3 flex flex-col items-center">
@@ -172,61 +195,48 @@ export default function RecipeCreate() {
               handleEditIngredientButton={handleEditIngredientButton}
             />
 
-            {/* <CodeAndDescriptionForm
-              form={form}
-              inputCodeName="codigoReceita"
-              inputCodeValue={form.codigoReceita}
-              inputDescriptionName="descricaoReceita"
-              inputDescriptionValue={form.descricaoReceita}
-              handleChanges={handleChanges}
-              handleAddButton={handleAddButton}
-            /> */}
+            <div className="h-full w-full bg-white flex flex-col items-center">
+              <table className="table w-full md:w-fit border-t-2 border-x-2 border-az3 p-2 mt-5">
+                <thead>
+                  <tr>
+                    <th className="md:pl-10 md:pr-10 xl:pl-20 xl:pr-20 w-3/12 pt-2 pb-2 text-center">
+                      Receita
+                    </th>
 
-              <div className="h-full w-full bg-white flex flex-col items-center">
-                <table className="table w-full md:w-fit border-t-2 border-x-2 border-az3 p-2 mt-5">
-                  <thead>
-                    <tr>
-                      <th className="md:pl-10 md:pr-10 xl:pl-20 xl:pr-20 w-3/12 pt-2 pb-2 text-center">
-                        Receita
-                      </th>
+                    <th className="md:pl-10 md:pr-10 xl:pl-20 xl:pr-20 w-2/12 pt-2 pb-2 text-center">
+                      <input
+                        type="input"
+                        name="codigoReceita"
+                        placeholder="Código"
+                        onChange={handleRecipeChanges}
+                        value={recipe.codigoReceita}
+                        className="m-2 h-8 pl-1 w-20 bg-slate-100 rounded-sm"></input>
+                    </th>
 
-                      <th className="md:pl-10 md:pr-10 xl:pl-20 xl:pr-20 w-2/12 pt-2 pb-2 text-center">
-                        <input
-                          type="input"
-                          name="codigoReceita"
-                          placeholder="Código"
-                          onChange={handleRecipeChanges}
-                          value={recipe.codigoReceita}
-                          className="m-2 h-8 pl-1 w-20 bg-slate-100 rounded-sm">
-                        </input>
-                      </th>
+                    <th className="md:pl-10 md:pr-10 xl:pl-20 xl:pr-20 pt-2 pb-2 text-center">
+                      <input
+                        type="input"
+                        name="descricaoReceita"
+                        placeholder="Descrição"
+                        onChange={handleRecipeChanges}
+                        value={recipe.descricaoReceita}
+                        className="h-8 pl-1 w-60 bg-slate-100 rounded-sm"></input>
+                    </th>
+                  </tr>
+                </thead>
+              </table>
 
-                      <th className="md:pl-10 md:pr-10 xl:pl-20 xl:pr-20 pt-2 pb-2 text-center">
-                        <input
-                          type="input"
-                          name="descricaoReceita"
-                          placeholder="Descrição"
-                          onChange={handleRecipeChanges}
-                          value={recipe.descricaoReceita}
-                          className="h-8 pl-1 w-60 bg-slate-100 rounded-sm">
-                        </input>
-
-                      </th>
-                    </tr>
-                  </thead>
-                </table>
-
-                <RecipeWithIngredientsTable2
-                  ingredients={ingredients}
-                  recipeIngredients={recipeIngredients}
-                  inputCodeName="previsto"
-                  handleRemoveIngredientButton={handleRemoveIngredientButton}
-                  editRecipeIngredient={editRecipeIngredient}
-                  setRecipeEditIngredient={setRecipeEditIngredient}
-                  setFormValue={setFormValue}
-                  handleSwapIngredientsButton={handleSwapIngredientsButton}
-                />
-              </div>
+              <RecipeWithIngredientsTable2
+                ingredients={ingredients}
+                recipeIngredients={recipeIngredients}
+                inputCodeName="previsto"
+                handleRemoveIngredientButton={handleRemoveIngredientButton}
+                editRecipeIngredient={editRecipeIngredient}
+                setRecipeEditIngredient={setRecipeEditIngredient}
+                setFormValue={setFormValue}
+                handleSwapIngredientsButton={handleSwapIngredientsButton}
+              />
+            </div>
           </div>
         </div>
       </div>

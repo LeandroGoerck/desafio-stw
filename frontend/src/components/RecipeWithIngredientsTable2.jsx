@@ -6,13 +6,14 @@ import {
   Trash,
 } from "phosphor-react";
 
-export default function RecipeWithIngredientsTable2(props) {
+export default function RecipeWithIngredientsTable(props) {
   const handleViewEditButton = (
-    recipeIngredientId,
+    recipeIngredientOrdem,
     editRecipeIngredientData
   ) => {
+    console.log(recipeIngredientOrdem)
     if (editRecipeIngredient === 0) {
-      setRecipeEditIngredient(recipeIngredientId);
+      setRecipeEditIngredient(recipeIngredientOrdem);
 
       setFormValue((prevState) => ({
         ...prevState,
@@ -29,6 +30,7 @@ export default function RecipeWithIngredientsTable2(props) {
     setRecipeEditIngredient,
     setFormValue,
     handleSwapIngredientsButton,
+    ingredients,
   } = props;
   return (
     <table className="table-fixed w-full md:w-fit border-2 border-az3 p-2 mb-5">
@@ -59,20 +61,21 @@ export default function RecipeWithIngredientsTable2(props) {
               <tr
                 key={`${ing.id}${index}`}
                 className={`${
-                  editRecipeIngredient === ing.id && "bg-az1"
+                  editRecipeIngredient === ing.ordem && "bg-az1"
                 } text-center items-center border`}>
                 <td>
                   <span className="pt-2 pb-2">{ing.ordem}</span>
+                  {/* <span className="pt-2 pb-2">{index+1}</span> */}
                 </td>
 
                 <td className="flex flex-box justify-center">
                   <span className="pt-2 pb-2">
-                    {ing.ingredientes.codigoIngrediente}
+                    {ing.ingredientesCodigoIngrediente}
                   </span>
                 </td>
 
                 <td className="pt-2 pb-2">
-                  {ing.ingredientes.descricaoIngrediente}
+                  {ingredients.find(i => i.codigoIngrediente === ing.ingredientesCodigoIngrediente).descricaoIngrediente}
                 </td>
 
                 <td>
@@ -86,16 +89,12 @@ export default function RecipeWithIngredientsTable2(props) {
                       className="h-fit w-fit ml-2 mr-2 disabled:text-cz1"
                       disabled={index === 0 }
                       onClick={() => {
-                        const ingredients = [
+                        const ingredients = 
                           {
-                            id: ing.id,
-                            ordem: recipeIngredients[index - 1].ordem,
-                          },
-                          {
-                            id: recipeIngredients[index - 1].id,
-                            ordem: ing.ordem,
-                          },
-                        ];
+                            actual: index+1,
+                            target: index,
+                          }
+                        ;
 
                         handleSwapIngredientsButton(ingredients);
                       }}>
@@ -108,16 +107,12 @@ export default function RecipeWithIngredientsTable2(props) {
                       className="h-fit w-fit ml-2 mr-2 disabled:text-cz1"
                       disabled={index === (recipeIngredients.length - 1) }
                       onClick={() => {
-                        const ingredients = [
+                        const ingredients = 
                           {
-                            id: ing.id,
-                            ordem: recipeIngredients[index + 1].ordem,
-                          },
-                          {
-                            id: recipeIngredients[index + 1].id,
-                            ordem: ing.ordem,
-                          },
-                        ];
+                            actual: index+1,
+                            target: index+2,
+                          }
+                        ;
 
                         handleSwapIngredientsButton(ingredients);
                       }}>
@@ -125,13 +120,13 @@ export default function RecipeWithIngredientsTable2(props) {
                     </button>
                   
 
-                  {ing.id === editRecipeIngredient ? (
+                  {ing.ordem === editRecipeIngredient ? (
                     <button
                       type="button"
                       className="h-fit w-fit ml-2 mr-2"
                       onClick={() => {
                         setRecipeEditIngredient(0);
-                        // handleEditButton(ing.id);
+                        // handleEditButton(ing.ordem);
                       }}>
                       <RadioButton size={22} weight="fill" />
                     </button>
@@ -140,12 +135,14 @@ export default function RecipeWithIngredientsTable2(props) {
                       type="button"
                       className="h-fit w-fit ml-2 mr-2"
                       onClick={() =>
-                        handleViewEditButton(ing.id, {
+                        handleViewEditButton(ing.ordem, 
+                          {
                           ingredientesCodigoIngrediente:
-                            ing.ingredientes.codigoIngrediente,
+                          ing.ingredientesCodigoIngrediente,
                           previsto: ing.previsto,
                           ordem: ing.ordem,
-                        })
+                        }
+                        )
                       }>
                       <RadioButton size={22} />
                     </button>
@@ -153,7 +150,7 @@ export default function RecipeWithIngredientsTable2(props) {
 
                   <button
                     type="button"
-                    onClick={() => handleRemoveIngredientButton(ing.id)}>
+                    onClick={() => handleRemoveIngredientButton(ing.ordem)}>
                     <Trash size={22} className="ml-2 mr-2" />
                   </button>
                 </td>
@@ -163,3 +160,4 @@ export default function RecipeWithIngredientsTable2(props) {
     </table>
   );
 }
+
