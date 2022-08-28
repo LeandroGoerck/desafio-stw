@@ -7,7 +7,8 @@ Criar o frontend e o backend para criação e edição de listas de receitas
 A produção de uma fábrica de farinhas trabalha diariamente com diversos tipos de receitas.
 Essas receitas possuem um conjunto de ingredientes que devem ser consumidos na ordem em que foram salvos.
 Atualmente as receitas já estão organizadas em planilhas do Excel e são impressas sempre que uma receita é finalizada.
-O desafio é implementar uma aplicação web para cadastro de receitas para liminar a impressão em papel e facilitar o gerenciamento das mesmas.
+O desafio é implementar uma aplicação web para cadastro de receitas para eliminar a impressão em papel e facilitar o gerenciamento das mesmas.
+
 
 Com as seguintes funcionalidades:
 1. Receitas
@@ -73,15 +74,14 @@ Este projeto está em desenvolvimento.
 
 # Licença
 
-Este projeto esta sob a licença [MIT](https://pt.wikipedia.org/wiki/Licen%C3%A7a_MIT).
-
+Este projeto está sob a licença [MIT](https://pt.wikipedia.org/wiki/Licen%C3%A7a_MIT).
 ---
 
 # Habilidades desenvolvidas
 
 - Criação do backend com express e typescript
 - Teste das rotas utilizando Postman
-- Integração com mysql utilzando Prisma ORM
+- Integração com mysql utilizando Prisma ORM
 - Desenvolvimento de telas com React, javascript e hooks
 - Criação, leitura, edição e exclusão (CRUD) de ingredientes
 - CRUD de receitas com ingredientes cadastrados
