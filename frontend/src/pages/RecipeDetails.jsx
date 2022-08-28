@@ -126,7 +126,7 @@ export default function RecipeDetails() {
         <div className="flex flex-col items-center justify-center">
           <div className="mt-14 mb-14  w-full md:w-2/3 flex flex-col items-center">
             <span>CADASTRO DE ETAPAS DA RECEITA</span>
-            <span>{recipeId}</span>
+            <span>ID: {recipeId}</span>
             <AddIngredientToRecipeForm
               recipeId={recipeId}
               form={form}
