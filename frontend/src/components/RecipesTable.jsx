@@ -39,6 +39,8 @@ export default function RecipesTable(props) {
                   <NotePencil size={22} className="ml-2 mr-2" />
                 </Link>
 
+               
+
                 <button type="button" onClick={() => removeRecipe(recipe.id)}>
                   <Trash size={22} className="ml-2 mr-2" />
                 </button>

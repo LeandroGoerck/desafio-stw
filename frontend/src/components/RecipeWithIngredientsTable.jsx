@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   ArrowFatLineDown,
@@ -19,7 +18,6 @@ export default function RecipeWithIngredientsTable(props) {
         ...prevState,
         ...editRecipeIngredientData,
       }));
-
     }
   };
 
@@ -30,9 +28,34 @@ export default function RecipeWithIngredientsTable(props) {
     setRecipeEditIngredient,
     setFormValue,
     handleSwapIngredientsButton,
+    inputRecipeCodeValue,
+    inputRecipeDescriptionValue,
   } = props;
   return (
-    <table className="table-fixed w-full md:w-fit border-2 border-az3 p-2 mb-5">
+    <table className="table-fixed w-full border-2 border-az3 p-2 mb-5">
+      <thead className="border-2 border-az3 ">
+        <tr>
+          <th>
+            <div className="flex flex-row items-center mt-2 mb-2">
+              <div className="ml-5 flex flex-row items-center">
+                <div className="text-lg font-semibold flex flex-row items-center">Receita</div>
+                <div className="h-8 pl-1 w-20 bg-slate-100 rounded-sm ml-2 flex flex-row items-center">
+                  {inputRecipeCodeValue}
+                </div>
+              </div>
+              <div className="flex flex-row items-center">
+                <div className="ml-5 hidden text-lg font-semibold md:flex flex-row items-center">
+                  Descrição
+                </div>
+                <div className="h-8 pl-1 bg-slate-100 rounded-sm ml-2 w-60 flex flex-row items-center">
+                  {inputRecipeDescriptionValue}
+                </div>
+              </div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+
       <thead>
         <tr>
           <th className="md:pl-10 md:pr-10 xl:pl-20 xl:pr-20 pt-2 pb-2 text-center">
@@ -81,50 +104,47 @@ export default function RecipeWithIngredientsTable(props) {
                 </td>
 
                 <td className="pt-2 pb-2 flex flex-row justify-end">
+                  <button
+                    type="button"
+                    className="h-fit w-fit ml-2 mr-2 disabled:text-cz1"
+                    disabled={index === 0}
+                    onClick={() => {
+                      const ingredients = [
+                        {
+                          id: ing.id,
+                          ordem: recipeIngredients[index - 1].ordem,
+                        },
+                        {
+                          id: recipeIngredients[index - 1].id,
+                          ordem: ing.ordem,
+                        },
+                      ];
 
-                    <button
-                      type="button"
-                      className="h-fit w-fit ml-2 mr-2 disabled:text-cz1"
-                      disabled={index === 0 }
-                      onClick={() => {
-                        const ingredients = [
-                          {
-                            id: ing.id,
-                            ordem: recipeIngredients[index - 1].ordem,
-                          },
-                          {
-                            id: recipeIngredients[index - 1].id,
-                            ordem: ing.ordem,
-                          },
-                        ];
+                      handleSwapIngredientsButton(ingredients);
+                    }}>
+                    <ArrowFatLineUp size={22} />
+                  </button>
 
-                        handleSwapIngredientsButton(ingredients);
-                      }}>
-                      <ArrowFatLineUp size={22} />
-                    </button>
+                  <button
+                    type="button"
+                    className="h-fit w-fit ml-2 mr-2 disabled:text-cz1"
+                    disabled={index === recipeIngredients.length - 1}
+                    onClick={() => {
+                      const ingredients = [
+                        {
+                          id: ing.id,
+                          ordem: recipeIngredients[index + 1].ordem,
+                        },
+                        {
+                          id: recipeIngredients[index + 1].id,
+                          ordem: ing.ordem,
+                        },
+                      ];
 
-                  
-                    <button
-                      type="button"
-                      className="h-fit w-fit ml-2 mr-2 disabled:text-cz1"
-                      disabled={index === (recipeIngredients.length - 1) }
-                      onClick={() => {
-                        const ingredients = [
-                          {
-                            id: ing.id,
-                            ordem: recipeIngredients[index + 1].ordem,
-                          },
-                          {
-                            id: recipeIngredients[index + 1].id,
-                            ordem: ing.ordem,
-                          },
-                        ];
-
-                        handleSwapIngredientsButton(ingredients);
-                      }}>
-                      <ArrowFatLineDown size={22} />
-                    </button>
-                  
+                      handleSwapIngredientsButton(ingredients);
+                    }}>
+                    <ArrowFatLineDown size={22} />
+                  </button>
 
                   {ing.id === editRecipeIngredient ? (
                     <button
@@ -164,4 +184,3 @@ export default function RecipeWithIngredientsTable(props) {
     </table>
   );
 }
-

@@ -29,9 +29,45 @@ export default function RecipeWithIngredientsTable(props) {
     setFormValue,
     handleSwapIngredientsButton,
     ingredients,
+    inputRecipeCodeName,
+    handleRecipeChanges,
+    inputRecipeCodeValue,
+    inputRecipeDescription,
+    inputRecipeDescriptionValue,
   } = props;
   return (
-    <table className="table-fixed w-full md:w-fit border-2 border-az3 p-2 mb-5">
+    <table className="table-fixed w-full border-2 border-az3 p-2 mb-5">
+      <thead className="border-2 border-az3 ">
+        <tr>
+          <th>
+            <div className="flex flex-row items-center">
+              <div className="ml-5 flex flex-row items-center">
+                <span className="text-lg font-semibold">Receita</span>
+                <input
+                  type="input"
+                  name={inputRecipeCodeName}
+                  placeholder="Código"
+                  onChange={handleRecipeChanges}
+                  value={inputRecipeCodeValue}
+                  className="m-2 h-8 pl-1 w-20 bg-slate-100 rounded-sm"></input>
+              </div>
+              <div className="flex flex-row items-center">
+                <span className="hidden md:inline-block text-lg font-semibold">
+                  Descrição
+                </span>
+                <input
+                  type="input"
+                  name={inputRecipeDescription}
+                  placeholder="Descrição"
+                  onChange={handleRecipeChanges}
+                  value={inputRecipeDescriptionValue}
+                  className="h-8 pl-1 bg-slate-100 rounded-sm ml-2"></input>
+              </div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+
       <thead>
         <tr>
           <th className="md:pl-10 md:pr-10 xl:pl-20 xl:pr-20 pt-2 pb-2 text-center">
