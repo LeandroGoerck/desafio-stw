@@ -33,11 +33,16 @@ Com as seguintes funcionalidades:
 - [Habilidades desenvolvidas](#habilidades-desenvolvidas)
 - [Tecnologias utilizadas](#tecnologias-utilizadas)
 - [Organização e Estruturação do Projeto](#organização-e-estruturação-do-projeto)
+- [Organização e Estruturação do Banco de Dados](#organização-e-estruturação-do-banco-de-dados)  
+O banco de dados utilizado está ilustrado na figura abaixo:
+  ![Planejamento do Banco](./imagens/planejamento_banco.png)
+
 - [Pré-requisitos](#pré-requisitos)
   - [Ferramentas necessárias](#ferramentas-necessárias)
   - [Rodando no servidor local](#rodando-no-servidor-local)
   - [Quer contribuir com o projeto?](#quer-contribuir-com-o-projeto)
-- [Orientações detalhadas de como utilizar](#orientações-detalhadas-de-como-utilizar)
+- [Orientações detalhadas de como utilizar a página WEB](#orientações-web)
+- [Orientações detalhadas de como utilizar a API](#orientações-detalhadas-de-como-utilizar)
   - [Ingredients](#ingredients)
     - [Ingredients create](#ingredients-create)
     - [Ingredients getAll](#ingredients-getall)
@@ -61,8 +66,7 @@ Com as seguintes funcionalidades:
 - [Agradecimentos](#agradecimentos)
 - [Autor](#autor)
 
-O banco de dados utilizado está ilustrado na figura abaixo:
-  ![Planejamento do Banco](./imagens/planejamento_banco.png)
+
 
   ---
 
@@ -103,7 +107,94 @@ Este projeto está sob a licença [MIT](https://pt.wikipedia.org/wiki/Licen%C3%A
 # Organização e Estruturação do Projeto
 
 O projeto está organizado e estruturado da seguinte maneira:
-
+```
+├── backend
+│   ├── example.env
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── prisma
+│   │   ├── migrations
+│   │   │   ├── 20220819014704_1
+│   │   │   │   └── migration.sql
+│   │   │   └── migration_lock.toml
+│   │   ├── schema.prisma
+│   │   └── seed.ts
+│   ├── src
+│   │   ├── app.ts
+│   │   ├── controllers
+│   │   │   ├── ingredientsController.ts
+│   │   │   └── recipesController.ts
+│   │   ├── database
+│   │   │   └── prismaClient.ts
+│   │   ├── interfaces
+│   │   │   ├── IAddIngredient.ts
+│   │   │   ├── ICreateOrUpdateRecipe.ts
+│   │   │   ├── ICreateRecipe.ts
+│   │   │   ├── IIngredient.ts
+│   │   │   ├── IRecipe.ts
+│   │   │   └── ISwapIngredient.ts
+│   │   ├── middlewares
+│   │   │   └── errorMiddleware.ts
+│   │   ├── routes
+│   │   │   ├── ingredientsRoutes.ts
+│   │   │   └── recipesRoutes.ts
+│   │   ├── server.ts
+│   │   └── services
+│   │       ├── customError.ts
+│   │       ├── errors.ts
+│   │       ├── ingredientsService.ts
+│   │       └── recipesService.ts
+│   └── tsconfig.json
+├── frontend
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── postcss.config.js
+│   ├── public
+│   │   ├── favicon.ico
+│   │   ├── index.html
+│   │   ├── manifest.json
+│   │   ├── robots.txt
+│   │   └── stw.svg
+│   ├── README.md
+│   ├── src
+│   │   ├── App.css
+│   │   ├── App.js
+│   │   ├── App.test.js
+│   │   ├── components
+│   │   │   ├── AddIngredientToRecipeForm2.jsx
+│   │   │   ├── AddIngredientToRecipeForm.jsx
+│   │   │   ├── CodeAndDescriptionForm.jsx
+│   │   │   ├── IngredientSelect.jsx
+│   │   │   ├── IngredientsTable.jsx
+│   │   │   ├── NavBar.jsx
+│   │   │   ├── RecipesForm.jsx
+│   │   │   ├── RecipesTable.jsx
+│   │   │   ├── RecipeWithIngredientsTable2.jsx
+│   │   │   └── RecipeWithIngredientsTable.jsx
+│   │   ├── context
+│   │   │   ├── GlobalContext.js
+│   │   │   └── GlobalProvider.jsx
+│   │   ├── helpers
+│   │   │   └── request.js
+│   │   ├── index.css
+│   │   ├── index.js
+│   │   ├── logo.svg
+│   │   ├── pages
+│   │   │   ├── Ingredients.jsx
+│   │   │   ├── RecipeCreate.jsx
+│   │   │   ├── RecipeDetails.jsx
+│   │   │   └── Recipes.jsx
+│   │   ├── reportWebVitals.js
+│   │   ├── routes
+│   │   │   └── index.js
+│   │   └── setupTests.js
+│   └── tailwind.config.js
+├── imagens
+│   └── planejamento_banco.png
+├── package-lock.json
+├── README.md
+```
+---
 # Pré-requisitos
 
 ## Ferramentas necessárias
