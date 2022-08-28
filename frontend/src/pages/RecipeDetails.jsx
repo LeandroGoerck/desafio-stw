@@ -120,7 +120,7 @@ export default function RecipeDetails() {
 
   return (
     <div className="w-full h-full">
-      <div className="md:m-14 shadow-lg h-full">
+      <div className="lg:m-14 shadow-lg h-full">
         <NavBar />
 
         <div className="flex flex-col items-center justify-center">
@@ -138,23 +138,9 @@ export default function RecipeDetails() {
             {recipe && (
               <div className="h-full w-full bg-white flex flex-col items-center">
 
-                <table className="table w-full md:w-fit border-t-2 border-x-2 border-az3 p-2 mt-5">
-                  <thead>
-                    <tr>
-                      <th className="md:pl-10 md:pr-10 xl:pl-20 xl:pr-20 w-3/12 pt-2 pb-2 text-center">
-                        Receita
-                      </th>
-                      <th className="md:pl-10 md:pr-10 xl:pl-20 xl:pr-20 w-2/12 pt-2 pb-2 text-center">
-                      {recipe.codigoReceita}
-                      </th>
-                      <th className="md:pl-10 md:pr-10 xl:pl-20 xl:pr-20  pt-2 pb-2 text-center">
-                      {recipe.descricaoReceita}
-                      </th>
-                    </tr>
-                  </thead>
-                </table>
-
                 <RecipeWithIngredientsTable
+                  inputRecipeCodeValue={recipe.codigoReceita}
+                  inputRecipeDescriptionValue={recipe.descricaoReceita}
                   recipeIngredients={recipe.ingredientes}
                   inputCodeName="previsto"
                   handleRemoveIngredientButton={handleRemoveIngredientButton}
@@ -163,7 +149,6 @@ export default function RecipeDetails() {
                   setFormValue={setFormValue}
                   handleSwapIngredientsButton={handleSwapIngredientsButton}
                 />
-
               </div>
             )}
           </div>
