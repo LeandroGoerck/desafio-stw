@@ -23,7 +23,6 @@ export default function RecipeCreate() {
   useEffect(() => {
     api.get("/ingredients").then(({ data }) => {
       setIngredients(data.ingredientsData);
-      console.log(data.ingredientsData);
     });
   }, []);
 
@@ -43,31 +42,26 @@ export default function RecipeCreate() {
   useEffect(() => {
     if (recipeId > 0) {
       api.get(`/recipes/${recipeId}`).then(({ data }) => {
-        setRecipeTemp(data.recipeFound)
+        setRecipeTemp(data.recipeFound);
       });
-    } 
+    }
   }, [recipeId]);
 
   useEffect(() => {
-
     if (recipeTemp) {
-      const formattedIngredients = [...recipeTemp.ingredientes].map(
-        (ing) => ({
-          ingredientesCodigoIngrediente: ing.ingredientes.codigoIngrediente,
-          ordem: ing.ordem,
-          previsto: ing.previsto,
-          id: ing.id
-        })
-      );
-      console.log('formattedIngredients', formattedIngredients);
+      const formattedIngredients = [...recipeTemp.ingredientes].map((ing) => ({
+        ingredientesCodigoIngrediente: ing.ingredientes.codigoIngrediente,
+        ordem: ing.ordem,
+        previsto: ing.previsto,
+        id: ing.id,
+      }));
       setRecipeIngredients(formattedIngredients);
       setRecipe({
         codigoReceita: recipeTemp.codigoReceita,
         descricaoReceita: recipeTemp.descricaoReceita,
-      })
+      });
     }
-        
-  }, [recipeTemp])
+  }, [recipeTemp]);
 
   const handleChanges = (e) => {
     let { name, value } = e.target;
@@ -91,7 +85,6 @@ export default function RecipeCreate() {
       [name]: value,
     }));
   };
-
 
   const handleRemoveIngredientButton = async (ordem) => {
     setRecipeIngredients(recipeIngredients.filter((i) => i.ordem !== ordem));
@@ -117,14 +110,12 @@ export default function RecipeCreate() {
   };
 
   const handleEditIngredientButton = async () => {
-    console.log(editRecipeIngredient, form);
     const updatedIngredientList = [...recipeIngredients].map((ing) => {
       if (ing.ordem === editRecipeIngredient) {
         return form;
       }
       return ing;
     });
-    console.log("updatedIngredientList", updatedIngredientList);
     setRecipeIngredients(updatedIngredientList);
     setRecipeEditIngredient(0);
   };
@@ -148,7 +139,7 @@ export default function RecipeCreate() {
         ingredientesCodigoIngrediente: ing.ingredientesCodigoIngrediente,
         ordem: index + 1,
         previsto: ing.previsto,
-        id: ing.id
+        id: ing.id,
       })
     );
 
@@ -156,27 +147,22 @@ export default function RecipeCreate() {
   };
 
   const handleSaveButton = () => {
-
     const data = {
       ...recipe,
-      ingredientes: recipeIngredients 
-    }
+      ingredientes: recipeIngredients,
+    };
 
     api.post(`/recipes/create/${recipeId}`, data).then((returnedMessage) => {
       if (returnedMessage.status === 201) {
-        console.log(returnedMessage.data.recipesData.id);
-        const receivedRecipeId =returnedMessage.data.recipesData.id;
-        
+        const receivedRecipeId = returnedMessage.data.recipesData.id;
 
         api.get(`/recipes/${receivedRecipeId}`).then(({ data }) => {
           setRecipeTemp(data.recipeFound);
-          console.log(data.recipeFound);
-          setRecipeId(receivedRecipeId)
+          setRecipeId(receivedRecipeId);
         });
       }
     });
-    
-  }
+  };
 
   return (
     <div className="w-full h-full">
@@ -186,13 +172,12 @@ export default function RecipeCreate() {
         <button
           type="button"
           className="absolute right-0 m-2"
-          onClick={handleSaveButton}
-        >
-          <FloppyDisk size={32}/>
+          onClick={handleSaveButton}>
+          <FloppyDisk size={32} />
         </button>
 
         <div className="flex flex-col items-center justify-center">
-          <div className="mt-14 mb-14  w-full md:w-2/3 flex flex-col items-center">
+          <div className="mt-14 mb-14  w-full lg:w-2/3 flex flex-col items-center">
             <span>CADASTRO DE ETAPAS DA RECEITA</span>
             <span>{recipeId}</span>
             <AddIngredientToRecipeForm2
@@ -206,37 +191,14 @@ export default function RecipeCreate() {
             />
 
             <div className="h-full w-full bg-white flex flex-col items-center">
-              <table className="table w-full md:w-fit border-t-2 border-x-2 border-az3 p-2 mt-5">
-                <thead>
-                  <tr>
-                    <th className="md:pl-10 md:pr-10 xl:pl-20 xl:pr-20 w-3/12 pt-2 pb-2 text-center">
-                      Receita
-                    </th>
-
-                    <th className="md:pl-10 md:pr-10 xl:pl-20 xl:pr-20 w-2/12 pt-2 pb-2 text-center">
-                      <input
-                        type="input"
-                        name="codigoReceita"
-                        placeholder="Código"
-                        onChange={handleRecipeChanges}
-                        value={recipe.codigoReceita}
-                        className="m-2 h-8 pl-1 w-20 bg-slate-100 rounded-sm"></input>
-                    </th>
-
-                    <th className="md:pl-10 md:pr-10 xl:pl-20 xl:pr-20 pt-2 pb-2 text-center">
-                      <input
-                        type="input"
-                        name="descricaoReceita"
-                        placeholder="Descrição"
-                        onChange={handleRecipeChanges}
-                        value={recipe.descricaoReceita}
-                        className="h-8 pl-1 w-60 bg-slate-100 rounded-sm"></input>
-                    </th>
-                  </tr>
-                </thead>
-              </table>
 
               <RecipeWithIngredientsTable2
+                inputRecipeCodeName="codigoReceita"
+                inputRecipeDescription="descricaoReceita"
+                handleRecipeChanges={handleRecipeChanges}
+                inputRecipeCodeValue={recipe.codigoReceita}
+                inputRecipeDescriptionValue={recipe.descricaoReceita}
+
                 ingredients={ingredients}
                 recipeIngredients={recipeIngredients}
                 inputCodeName="previsto"
