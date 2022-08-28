@@ -1,10 +1,13 @@
 # Desafio-STW
 Criar o frontend e o backend para criação e edição de listas de receitas
 
+---
 
 # Descritivo do desafio
-## Backend
-O desafio é implementar um backend REST para uma aplicação de criação e edição de receitas.
+A produção de uma fábrica de farinhas trabalha diariamente com diversos tipos de receitas.
+Essas receitas possuem um conjunto de ingredientes que devem ser consumidos na ordem em que foram salvos.
+Atualmente as receitas já estão organizadas em planilhas do Excel e são impressas sempre que uma receita é finalizada.
+O desafio é implementar uma aplicação web para cadastro de receitas para liminar a impressão em papel e facilitar o gerenciamento das mesmas.
 
 Com as seguintes funcionalidades:
 1. Receitas
@@ -19,7 +22,6 @@ Com as seguintes funcionalidades:
   - [x] Adicionar um novo ingrediente
   - [x] Atualizar um ingrediente
   - [x] Excluir um ingrediente
-
 
 ---
 
