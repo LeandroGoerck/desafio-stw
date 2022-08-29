@@ -230,7 +230,7 @@ Para rodar o projeto, você vai precisar instalar as seguintes ferramentas:
 
  - Crie uma instância do banco de dados mysql ou suba com o comando docker:
     ```bash
-    docker run --name mysqldb -e MYSQL_ROOT_PASSWORD=1234 -d mysql:tag
+    docker run --name mysqldb -e MYSQL_ROOT_PASSWORD=1234 -d mysql:8
     ```
 
  - Rode as migrations do prisma para criar as tabelas:
