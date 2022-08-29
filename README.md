@@ -208,18 +208,43 @@ Para rodar o projeto, você vai precisar instalar as seguintes ferramentas:
 
  - Clone do Projeto e instale as dependências
 
+    ### Clone este repositório
     ```bash
-    # Clone este repositório
-    $ `git clone git@github.com:LeandroGoerck/desafio-stw.git`
-
-    # Acesse a pasta do projeto no terminal/cmd
-    $ `cd desafio-stw`
-
-    # Instale as dependências do backend e do frontend
-    $ `cd backend/ && npm install && cd ../frontend && npm install`
+    git clone git@github.com:LeandroGoerck/desafio-stw.git
     ```
- - Crie um arquivo chamado `.env` na raiz do projeto com as seguintes configurações:
+
+    ### Acesse a pasta do projeto no terminal/cmd
+    ```bash
+    cd desafio-stw
+    ```
+
+    ### Instale as dependências do backend e do frontend
+    ```bash
+    cd backend/ && npm install && cd ../frontend && npm install
+    
+ - Renomeie o arquivo `example.env` para `.env` ou crie um novo arquivo chamado `.env` na raiz do projeto de backend com as seguintes configurações:
     
     ### .env
 
     - DATABASE_URL="mysql://root:1234@localhost:3306/banco_receitas"
+
+ - Crie uma instância do banco de dados mysql ou suba com o comando docker:
+    ```bash
+    docker run --name mysqldb -e MYSQL_ROOT_PASSWORD=1234 -d mysql:tag
+    ```
+
+ - Rode as migrations do prisma para criar as tabelas:
+    ```bash
+    npx prisma migrate dev --name init
+    ```
+
+ - Inicie o sistema:
+
+    ### Inicie o backend
+    ```bash
+    cd backend && npm start
+    ```
+    ### Inicie o frontend
+    ```bash
+    cd frontend && npm start
+    ```
