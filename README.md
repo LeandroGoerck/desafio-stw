@@ -203,3 +203,23 @@ Para rodar o projeto, você vai precisar instalar as seguintes ferramentas:
  - [Git](https://git-scm.com);
  - [Node.js](https://nodejs.org/en/);
  - Um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/) ou outro de sua preferência;
+
+ ## Rodando no servidor local
+
+ - Clone do Projeto e instale as dependências
+
+    ```bash
+    # Clone este repositório
+    $ `git clone git@github.com:LeandroGoerck/desafio-stw.git`
+
+    # Acesse a pasta do projeto no terminal/cmd
+    $ `cd desafio-stw`
+
+    # Instale as dependências do backend e do frontend
+    $ `cd backend/ && npm install && cd ../frontend && npm install`
+    ```
+ - Crie um arquivo chamado `.env` na raiz do projeto com as seguintes configurações:
+    
+    ### .env
+
+    - DATABASE_URL="mysql://root:1234@localhost:3306/banco_receitas"
