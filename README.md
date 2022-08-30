@@ -85,7 +85,7 @@ O projeto está organizado e estruturado da seguinte maneira:
 │   ├── package-lock.json
 │   ├── prisma
 │   │   ├── migrations
-│   │   │   ├── 20220819014704_1
+│   │   │   ├── 20220830035300_init
 │   │   │   │   └── migration.sql
 │   │   │   └── migration_lock.toml
 │   │   ├── schema.prisma
@@ -161,7 +161,10 @@ O projeto está organizado e estruturado da seguinte maneira:
 │   │   └── setupTests.js
 │   └── tailwind.config.js
 ├── imagens
-│   └── planejamento_banco.png
+│   ├── criacao_de_receita.png
+│   ├── ingredientes.png
+│   ├── planejamento_banco.png
+│   └── receitas.png
 ├── package-lock.json
 ├── README.md
 ```
