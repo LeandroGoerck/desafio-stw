@@ -182,7 +182,7 @@ Para rodar o projeto, você vai precisar instalar as seguintes ferramentas:
 
     - Clone este repositório
     ```bash
-    git clone git@github.com:LeandroGoerck/desafio-stw.git
+    git clone https://github.com/LeandroGoerck/desafio-stw.git
     ```
 
     - Acesse a pasta do projeto no terminal/cmd
