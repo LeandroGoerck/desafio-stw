@@ -30,7 +30,7 @@ export default function RecipeDetails() {
 
   useEffect(() => {
     if (
-      form.ingredientesCodigoIngrediente.length >= 3 &&
+      form.ingredientesCodigoIngrediente.length >= 1 &&
       form.previsto >= 1
     ) {
       setDisableButton(false);

@@ -23,8 +23,8 @@ function Ingredients() {
 
   useEffect(() => {
     if (
-      form.codigoIngrediente.length >= 3 &&
-      form.descricaoIngrediente.length >= 3
+      form.codigoIngrediente.length >= 1 &&
+      form.descricaoIngrediente.length >= 1
     ) {
       setDisableButton(false);
     } else {

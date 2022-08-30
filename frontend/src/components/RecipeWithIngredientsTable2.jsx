@@ -95,7 +95,7 @@ export default function RecipeWithIngredientsTable(props) {
               <tr
                 key={`${ing.id}${index}`}
                 className={`${
-                  editRecipeIngredient === ing.ordem && "bg-az1"
+                  editRecipeIngredient === ing.ordem && "bg-cz1"
                 } text-center items-center border`}>
                 <td>
                   <span className="pt-2 pb-2">{ing.ordem}</span>
@@ -124,7 +124,7 @@ export default function RecipeWithIngredientsTable(props) {
                 <td className="pt-2 pb-2 flex flex-row justify-end">
                   <button
                     type="button"
-                    className="h-fit w-fit ml-2 mr-2 disabled:text-cz1"
+                    className="h-fit w-fit ml-2 mr-2 disabled:text-cz1 hover:text-az1"
                     disabled={index === 0}
                     onClick={() => {
                       const ingredients = {
@@ -138,7 +138,7 @@ export default function RecipeWithIngredientsTable(props) {
 
                   <button
                     type="button"
-                    className="h-fit w-fit ml-2 mr-2 disabled:text-cz1"
+                    className="h-fit w-fit ml-2 mr-2 disabled:text-cz1 hover:text-az1"
                     disabled={index === recipeIngredients.length - 1}
                     onClick={() => {
                       const ingredients = {
@@ -153,7 +153,7 @@ export default function RecipeWithIngredientsTable(props) {
                   {ing.ordem === editRecipeIngredient ? (
                     <button
                       type="button"
-                      className="h-fit w-fit ml-2 mr-2"
+                      className="h-fit w-fit ml-2 mr-2 hover:text-az1"
                       onClick={() => {
                         setRecipeEditIngredient(0);
                       }}>
@@ -162,7 +162,7 @@ export default function RecipeWithIngredientsTable(props) {
                   ) : (
                     <button
                       type="button"
-                      className="h-fit w-fit ml-2 mr-2"
+                      className="h-fit w-fit ml-2 mr-2 hover:text-az1"
                       onClick={() =>
                         handleViewEditButton(ing.ordem, {
                           ingredientesCodigoIngrediente:
@@ -177,8 +177,9 @@ export default function RecipeWithIngredientsTable(props) {
 
                   <button
                     type="button"
+                    className="h-fit w-fit ml-1 mr-2 hover:text-az1"
                     onClick={() => handleRemoveIngredientButton(ing.ordem)}>
-                    <Trash size={22} className="ml-2 mr-2" />
+                    <Trash size={22} />
                   </button>
                 </td>
               </tr>

@@ -39,7 +39,7 @@ export default function RecipeCreate() {
 
   const [form, setFormValue] = useState({
     ingredientesCodigoIngrediente: "",
-    previsto: 0,
+    previsto: "",
   });
 
   useEffect(() => {
@@ -79,8 +79,8 @@ export default function RecipeCreate() {
 
   useEffect(() => {
     if (
-      recipe.codigoReceita.length >= 3 &&
-      recipe.descricaoReceita.length >= 3 &&
+      recipe.codigoReceita.length >= 1 &&
+      recipe.descricaoReceita.length >= 1 &&
       recipeIngredients.length >= 1
     ) {
       setDisableSaveButton(false);
@@ -94,7 +94,7 @@ export default function RecipeCreate() {
     if (name === "previsto") {
       value = parseInt(value);
       if (!value) {
-        value = 0;
+        value = "";
       }
     }
     setFormValue((prevState) => ({
@@ -197,7 +197,7 @@ export default function RecipeCreate() {
 
         <button
           type="button"
-          className="h-10 w-10 absolute right-0 bg-white m-2 rounded-full flex flex-row items-center justify-center disabled:text-cz1"
+          className="h-10 w-10 absolute right-0 bg-white m-2 rounded-full flex flex-row items-center justify-center disabled:text-cz1 hover:text-az1"
           onClick={handleSaveButton}
           disabled={disableSaveButton}>
           <FloppyDisk size={32} />

@@ -23,8 +23,8 @@ function Recipes() {
 
   useEffect(() => {
     if (
-      form.codigoReceita.length >= 3 &&
-      form.descricaoReceita.length >= 3
+      form.codigoReceita.length >= 1 &&
+      form.descricaoReceita.length >= 1
     ) {
       setDisableButton(false);
     } else {

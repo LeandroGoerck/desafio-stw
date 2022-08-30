@@ -75,7 +75,7 @@ export default function IngredientsTable(props) {
                 {ing.id === editIngredient ? (
                   <button
                     type="button"
-                    className="h-fit w-fit ml-2 mr-2"
+                    className="h-fit w-fit ml-2 mr-2 hover:text-az1"
                     onClick={() => {
                       setEditIngredient(0);
                       handleEditButton(ing.id);
@@ -85,14 +85,14 @@ export default function IngredientsTable(props) {
                 ) : (
                   <button
                     type="button"
-                    className="h-fit w-fit ml-2 mr-2"
+                    className="h-fit w-fit ml-2 mr-2 hover:text-az1"
                     onClick={() => handleViewEditButton(ing.id, {codigoIngrediente: ing.codigoIngrediente, descricaoIngrediente: ing.descricaoIngrediente})}>
                     <NotePencil size={22} />
                   </button>
                 )}
                 <button
                   type="button"
-                  className="h-fit w-fit ml-2 mr-2"
+                  className="h-fit w-fit ml-2 mr-2 hover:text-az1"
                   onClick={() => removeIngredient(ing.id)}>
                   <Trash size={22} />
                 </button>

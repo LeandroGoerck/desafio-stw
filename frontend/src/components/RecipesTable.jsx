@@ -32,17 +32,17 @@ export default function RecipesTable(props) {
 
               <td className="pt-2 pb-2 flex flex-row justify-center">
                 <Link to={`/recipes/${recipe.id}`}>
-                  <Eye size={22} className="ml-2 mr-2" />
+                  <Eye size={22} className="ml-2 mr-2 hover:text-az1" />
                 </Link>
 
                 <Link to={`/create/${recipe.id}`}>
-                  <NotePencil size={22} className="ml-2 mr-2" />
+                  <NotePencil size={22} className="ml-2 mr-2 hover:text-az1" />
                 </Link>
 
                
 
                 <button type="button" onClick={() => removeRecipe(recipe.id)}>
-                  <Trash size={22} className="ml-2 mr-2" />
+                  <Trash size={22} className="ml-2 mr-2 hover:text-az1" />
                 </button>
               </td>
             </tr>
