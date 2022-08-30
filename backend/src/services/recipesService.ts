@@ -81,11 +81,20 @@ export default class RecipesService {
   };
 
   public deleteById = async (id: string) => {
-    console.log("id = ", id);
-    const deletedData = await prismaClient.receitas.delete({
+    const recipeFound = await prismaClient.receitas.findUnique({
       where: { id: parseInt(id) },
     });
-    return { deletedData };
+
+    if (recipeFound?.id !== null) {
+      await prismaClient.receitasTemIngredientes.deleteMany({
+        where: { receitasCodigoReceita: recipeFound?.codigoReceita },
+      });
+      const deletedData = await prismaClient.receitas.delete({
+        where: { id: parseInt(id) },
+      });
+
+      return { deletedData };
+    }
   };
 
   public addIngredient = async (ingredient: IAddIngredient) => {
