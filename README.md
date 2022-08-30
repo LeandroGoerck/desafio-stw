@@ -62,6 +62,7 @@ Este projeto está em concluido, porém sugestões de melhorias são sempre bem 
 - [React](https://create-react-app.dev/docs/getting-started)
 - [Tailwindcss](https://tailwindcss.com/docs/guides/create-react-app)
 - [Prisma](https://www.prisma.io/docs/getting-started/quickstart)
+- [Docker](https://www.docker.com/)
 - [Postman](https://www.postman.com/)
 
 ---
