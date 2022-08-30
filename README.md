@@ -60,6 +60,7 @@ Este projeto está sob a licença [MIT](https://pt.wikipedia.org/wiki/Licen%C3%A
 - Desenvolvimento de telas com React, javascript e hooks
 - Criação, leitura, edição e exclusão (CRUD) de ingredientes
 - CRUD de receitas com ingredientes cadastrados
+- Estilização e responsividade com Tailwindcss
 
 ---
 
@@ -71,6 +72,7 @@ Este projeto está sob a licença [MIT](https://pt.wikipedia.org/wiki/Licen%C3%A
 - [dotenv](https://www.npmjs.com/package/dotenv)
 - [React](https://create-react-app.dev/docs/getting-started)
 - [Tailwindcss](https://tailwindcss.com/docs/guides/create-react-app)
+- [Prisma](https://www.prisma.io/docs/getting-started/quickstart)
 - [Postman](https://www.postman.com/)
 
 ---
