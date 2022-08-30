@@ -218,7 +218,7 @@ Para rodar o projeto, você vai precisar instalar as seguintes ferramentas:
     ```bash
     cd backend && npm start
     ```
-    - Inicie o frontend
+    - Em outro terminal, inicie o frontend
     ```bash
     cd frontend && npm start
     ```
