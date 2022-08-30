@@ -172,6 +172,7 @@ O banco de dados utilizado está ilustrado na figura abaixo:
 Para rodar o projeto, você vai precisar instalar as seguintes ferramentas:
  - [Git](https://git-scm.com);
  - [Node.js >= 14.17](https://nodejs.org/en/);
+ - [Docker](https://www.docker.com/)
  - Um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/) ou outro de sua preferência;
 
  ## Rodando no servidor local
