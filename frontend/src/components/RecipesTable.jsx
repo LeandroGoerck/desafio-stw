@@ -1,5 +1,5 @@
 import React from "react";
-import { NotePencil, Trash, Eye } from "phosphor-react";
+import { NotePencil, Trash } from "phosphor-react";
 import { Link } from "react-router-dom";
 
 export default function RecipesTable(props) {
@@ -31,9 +31,6 @@ export default function RecipesTable(props) {
               <td className="pt-2 pb-2">{recipe.descricaoReceita}</td>
 
               <td className="pt-2 pb-2 flex flex-row justify-center">
-                {/* <Link to={`/recipes/${recipe.id}`}>
-                  <Eye size={22} className="ml-2 mr-2 hover:text-az1" />
-                </Link> */}
 
                 <Link to={`/create/${recipe.id}`}>
                   <NotePencil size={22} className="ml-2 mr-2 hover:text-az1" />
