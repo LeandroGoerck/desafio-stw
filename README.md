@@ -37,32 +37,7 @@ Com as seguintes funcionalidades:
 - [Pré-requisitos](#pré-requisitos)
   - [Ferramentas necessárias](#ferramentas-necessárias)
   - [Rodando no servidor local](#rodando-no-servidor-local)
-- [Orientações detalhadas de como utilizar a página WEB](#orientações-detalhadas-de-como-utilizar-a-página-WEB)
-- [Orientações detalhadas de como utilizar a API](#orientações-detalhadas-de-como-utilizar-a-API)
-  - [Ingredients](#ingredients)
-    - [Ingredients create](#ingredients-create)
-    - [Ingredients getAll](#ingredients-getall)
-    - [Ingredients getById](#ingredients-getbyid)
-    - [Ingredients updateById](#ingredients-updatebyid)
-    - [Ingredients deleteById](#ingredients-deletebyid)
-  - [Recipes](#recipes)
-    - [Recipes create](#recipes-create)
-    - [Recipes getAll](#recipes-getall)
-    - [Recipes getById](#recipes-getbyid)
-    - [Recipes updateById](#recipes-updatebyid)
-    - [Recipes deleteById](#recipes-deletebyid)
-    - [RecipesIngredient](#recipes-ingredient)
-    - [RecipesIngredient addIngredient](#recipes-ingredient-addingredient)
-    - [RecipesIngredient removeIngredient](#recipes-ingredient-removeingredient)
-    - [RecipesIngredient updateIngredientById](#recipes-ingredient-updateingredientbyId)
-    - [RecipesIngredient swapIngredients](#recipes-ingredient-swapingredients)
-    - [RecipesCreate createOrUpdate](#recipes-create-createorupdate)
-
-- [Contribuição](#contribuição)
-- [Agradecimentos](#agradecimentos)
-- [Autor](#autor)
-
-
+- [Orientações de como utilizar a página WEB](#orientações-de-como-utilizar-a-página-WEB)
 
   ---
 
@@ -256,32 +231,17 @@ Para rodar o projeto, você vai precisar instalar as seguintes ferramentas:
     Abra em qualquer navegador http://localhost:3000/
 
 ---
-# Orientações detalhadas de como utilizar a página WEB
+# Orientações de como utilizar a página WEB
 
-A ser implementado.
+A aplicação WEB possui três telas, e é possível navegar por elas através da barra de navegação.
+Os botões RECEITAS, INGREDIENTES e CRIAÇÃO DE RECEITA navegam por essas três telas. 
 
----
-# Orientações detalhadas de como utilizar a API
-A ser implementado.
-  ### Ingredients
-    - [Ingredients create](#ingredients-create)
-    - [Ingredients getAll](#ingredients-getall)
-    - [Ingredients getById](#ingredients-getbyid)
-    - [Ingredients updateById](#ingredients-updatebyid)
-    - [Ingredients deleteById](#ingredients-deletebyid)
-  ### Recipes
-    - [Recipes create](#recipes-create)
-    - [Recipes getAll](#recipes-getall)
-    - [Recipes getById](#recipes-getbyid)
-    - [Recipes updateById](#recipes-updatebyid)
-    - [Recipes deleteById](#recipes-deletebyid)
-    - [RecipesIngredient](#recipes-ingredient)
-    - [RecipesIngredient addIngredient](#recipes-ingredient-addingredient)
-    - [RecipesIngredient removeIngredient](#recipes-ingredient-removeingredient)
-    - [RecipesIngredient updateIngredientById](#recipes-ingredient-updateingredientbyId)
-    - [RecipesIngredient swapIngredients](#recipes-ingredient-swapingredients)
-    - [RecipesCreate createOrUpdate](#recipes-create-createorupdate)
+A primeira tela a ser preenchida pelo usuário é de ingredientes, onde serão cadastrados os ingredientes utilizados na fabricação das farinhas. Para isso, basta digitar o código e a descrição do ingrediente e clicar no botão de adicionar. A imagem abaixo ilustra a tela de cadastro de ingredientes:
 
-## Contribuição
-## Agradecimentos
-## Autor
+  ![Cadastro de ingredientes](./imagens/ingredientes.png)
+
+Em seguida, para criar uma nova receita, clique no botão CRIAÇÃO DE RECEITA na barra de navegação. Aqui o usuário pode selecionar os ingredientes e a quantidade em kg a ser adicionada na receita. Para salvar a receita no banco de dados, o código e a descrição da receita devem ser preenchidos. A figura abaixo ilustra a tela de cadastro de receitas:
+  ![Criação de receitas](./imagens/criacao_de_receita.png)
+
+Por fim, para visualizar todas as receitas criadas, basta clicar no botão RECEITAS. Nessa tela, cada receita possui um botão para editar e outro para excluir a mesma. A figura abaixo ilustra a tela de visualização de receitas:
+  ![Visualização da lista de receitas](./imagens/receitas.png)
