@@ -20,12 +20,13 @@ CREATE TABLE `ingredientes` (
 
 -- CreateTable
 CREATE TABLE `receitas_tem_ingredientes` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
     `receitas_codigo_receita` VARCHAR(191) NOT NULL,
     `ingredientes_codigo_ingrediente` VARCHAR(191) NOT NULL,
     `ordem` INTEGER NOT NULL,
     `previsto` INTEGER NOT NULL,
 
-    PRIMARY KEY (`receitas_codigo_receita`, `ingredientes_codigo_ingrediente`)
+    PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
