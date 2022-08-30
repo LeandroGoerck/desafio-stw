@@ -31,8 +31,7 @@ A aplicação deve ter as seguintes funcionalidades:
 - [Pré-requisitos](#pré-requisitos)
   - [Ferramentas necessárias](#ferramentas-necessárias)
   - [Rodando no servidor local](#rodando-no-servidor-local)
-- [Orientações de como utilizar a página WEB](#orientações-de-como-utilizar-a-página-WEB)
-
+- [Orientações de como utilizar](#orientações-de-como-utilizar)
 
   ---
 
@@ -226,7 +225,8 @@ Para rodar o projeto, você vai precisar instalar as seguintes ferramentas:
     Abra em qualquer navegador http://localhost:3000/
 
 ---
-# Orientações de como utilizar a página WEB
+
+# Orientações de como utilizar
 
 A aplicação WEB possui três telas, e é possível navegar por elas através da barra de navegação.
 Os botões RECEITAS, INGREDIENTES e CRIAÇÃO DE RECEITA navegam por essas três telas. 
@@ -241,3 +241,4 @@ Em seguida, para criar uma nova receita, clique no botão CRIAÇÃO DE RECEITA n
 
 Por fim, para gerenciar todas as receitas criadas, basta clicar no botão RECEITAS. Nessa tela, alem de ser possivel criar uma receita nova, cada receita possui um botão para editar e outro para excluir a mesma. A figura abaixo ilustra a tela de visualização de receitas:
   ![Visualização da lista de receitas](./imagens/receitas.png)
+
