@@ -252,3 +252,5 @@ Para rodar o projeto, você vai precisar instalar as seguintes ferramentas:
     ```bash
     cd frontend && npm start
     ```
+    Abra em qualquer navegador http://localhost:3000/
+    
