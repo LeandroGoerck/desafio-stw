@@ -221,19 +221,23 @@ Para rodar o projeto, você vai precisar instalar as seguintes ferramentas:
     ### Instale as dependências do backend e do frontend
     ```bash
     cd backend/ && npm install && cd ../frontend && npm install
-    
+    ```
+    ### Configure as variaveis de ambiente
+    No ubuntu
  - Renomeie o arquivo `example.env` para `.env` ou crie um novo arquivo chamado `.env` na raiz do projeto de backend com as seguintes configurações:
-    
-    ### .env
-
     - DATABASE_URL="mysql://root:1234@localhost:3306/banco_receitas"
-
- - Crie uma instância do banco de dados mysql ou suba com o comando docker:
+  
+    Se você estiver usando WSL, digite o comando:
     ```bash
-    docker run --name mysqldb -e MYSQL_ROOT_PASSWORD=1234 -d mysql:8
+    set DATABASE_URL="mysql://root:1234@localhost:3306/banco_receitas"
+    ```  
+    ### Suba uma instância do banco de dados mysql:
+    Utilizando um container docker:
+    ```bash
+    docker run -p 3306:3306 --name mysql_80 -e MYSQL_ROOT_PASSWORD=1234 -d mysql:8 mysqld --default-authentication-plugin=mysql_native_password
     ```
 
- - Rode as migrations do prisma para criar as tabelas:
+    ### Rode as migrations do prisma para criar as tabelas:
     ```bash
     npx prisma migrate dev --name init
     ```
