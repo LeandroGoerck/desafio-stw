@@ -124,7 +124,7 @@ export default function RecipeWithIngredientsTable(props) {
                 <td className="pt-2 pb-2 flex flex-row justify-end">
                   <button
                     type="button"
-                    className="h-fit w-fit ml-2 mr-2 disabled:text-cz1 hover:text-az1"
+                    className="h-fit w-fit ml-2 mr-2 disabled:text-cz1 hover:text-az1 hidden sm:block"
                     disabled={index === 0}
                     onClick={() => {
                       const ingredients = {
@@ -138,7 +138,7 @@ export default function RecipeWithIngredientsTable(props) {
 
                   <button
                     type="button"
-                    className="h-fit w-fit ml-2 mr-2 disabled:text-cz1 hover:text-az1"
+                    className="h-fit w-fit ml-2 mr-2 disabled:text-cz1 hover:text-az1 hidden sm:block"
                     disabled={index === recipeIngredients.length - 1}
                     onClick={() => {
                       const ingredients = {
