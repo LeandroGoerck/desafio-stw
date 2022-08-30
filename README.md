@@ -201,7 +201,7 @@ O projeto está organizado e estruturado da seguinte maneira:
 
 Para rodar o projeto, você vai precisar instalar as seguintes ferramentas:
  - [Git](https://git-scm.com);
- - [Node.js](https://nodejs.org/en/);
+ - [Node.js >= 14.17](https://nodejs.org/en/);
  - Um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/) ou outro de sua preferência;
 
  ## Rodando no servidor local
