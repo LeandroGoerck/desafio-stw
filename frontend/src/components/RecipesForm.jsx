@@ -30,7 +30,7 @@ export default function RecipesForm(props) {
         
         <button
           type="button"
-          className="h-10 w-10 bg-white ml-2 rounded-full flex flex-row items-center justify-center disabled:bg-cz1"
+          className="h-10 w-10 bg-white ml-2 rounded-full flex flex-row items-center justify-center disabled:text-cz1"
           onClick={handleAddIngredientButton}
           disabled={false}
           >

@@ -11,6 +11,8 @@ export default function RecipeCreate() {
   const [editRecipeIngredient, setRecipeEditIngredient] = useState(0);
   const { id } = useParams();
   const [recipeId, setRecipeId] = useState(parseInt(id) | 0);
+  const [disableButton, setDisableButton] = useState(true);
+  const [disableSaveButton, setDisableSaveButton] = useState(true);
 
   const [recipeTemp, setRecipeTemp] = useState(0);
 
@@ -18,6 +20,7 @@ export default function RecipeCreate() {
     codigoReceita: "",
     descricaoReceita: "",
   });
+
 
   const [ingredients, setIngredients] = useState([]);
   useEffect(() => {
@@ -62,6 +65,29 @@ export default function RecipeCreate() {
       });
     }
   }, [recipeTemp]);
+
+  useEffect(() => {
+    if (
+      form.ingredientesCodigoIngrediente.length >= 3 &&
+      form.previsto > 0
+    ) {
+      setDisableButton(false);
+    } else {
+      setDisableButton(true);
+    }
+  }, [form])
+
+  useEffect(() => {
+    if (
+      recipe.codigoReceita.length >= 3 &&
+      recipe.descricaoReceita.length >= 3 &&
+      recipeIngredients.length >= 1
+    ) {
+      setDisableSaveButton(false);
+    } else {
+      setDisableSaveButton(true);
+    }
+  }, [recipe, recipeIngredients])
 
   const handleChanges = (e) => {
     let { name, value } = e.target;
@@ -171,8 +197,9 @@ export default function RecipeCreate() {
 
         <button
           type="button"
-          className="absolute right-0 m-2"
-          onClick={handleSaveButton}>
+          className="h-10 w-10 absolute right-0 bg-white m-2 rounded-full flex flex-row items-center justify-center disabled:text-cz1"
+          onClick={handleSaveButton}
+          disabled={disableSaveButton}>
           <FloppyDisk size={32} />
         </button>
 
@@ -188,6 +215,7 @@ export default function RecipeCreate() {
               handleAddIngredientButton={handleAddIngredientButton}
               selectedIngredientToEdit={editRecipeIngredient}
               handleEditIngredientButton={handleEditIngredientButton}
+              disableButton={disableButton}
             />
 
             <div className="h-full w-full bg-white flex flex-col items-center">

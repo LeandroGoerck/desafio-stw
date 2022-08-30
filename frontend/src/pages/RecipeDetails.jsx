@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 
 export default function RecipeDetails() {
   const [editRecipeIngredient, setRecipeEditIngredient] = useState(0);
+  const [disableButton, setDisableButton] = useState(true);
   const { id } = useParams();
   const recipeId = parseInt(id);
 
@@ -26,6 +27,17 @@ export default function RecipeDetails() {
     previsto: 0,
     ordem: 1,
   });
+
+  useEffect(() => {
+    if (
+      form.ingredientesCodigoIngrediente.length >= 3 &&
+      form.previsto >= 1
+    ) {
+      setDisableButton(false);
+    } else {
+      setDisableButton(true);
+    }
+  }, [form])
 
   const handleChanges = (e) => {
     let { name, value } = e.target;
@@ -134,6 +146,7 @@ export default function RecipeDetails() {
               handleAddIngredientButton={handleAddIngredientButton}
               selectedIngredientToEdit={editRecipeIngredient}
               handleEditIngredientButton={handleEditIngredientButton}
+              disableButton={disableButton}
             />
             {recipe && (
               <div className="h-full w-full bg-white flex flex-col items-center">

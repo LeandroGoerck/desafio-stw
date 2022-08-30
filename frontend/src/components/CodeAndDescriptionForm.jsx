@@ -9,6 +9,7 @@ export default function CodeAndDescriptionForm(props) {
     inputDescriptionName,
     inputCodeValue,
     inputDescriptionValue,
+    disableButton,
   } = props;
 
   return (
@@ -35,9 +36,9 @@ export default function CodeAndDescriptionForm(props) {
 
         <button
           type="button"
-          className="h-10 w-10 bg-white ml-2 mr-2 rounded-full flex flex-row items-center justify-center disabled:bg-cz1"
+          className="h-10 w-10 bg-white ml-2 mr-2 rounded-full flex flex-row items-center justify-center disabled:text-cz1"
           onClick={() => handleAddButton()}
-          disabled={false}>
+          disabled={disableButton}>
           <FilePlus size={28} />
         </button>
 

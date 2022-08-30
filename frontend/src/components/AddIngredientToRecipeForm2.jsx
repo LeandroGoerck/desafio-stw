@@ -1,6 +1,5 @@
 import { ArrowFatLineRight, FilePlus } from "phosphor-react";
-import React, { useEffect, useState } from "react";
-import api from "../helpers/request";
+import React from "react";
 import IngredientSelect from "../components/IngredientSelect"
 
 export default function AddIngredientToRecipeForm2(props) {
@@ -11,6 +10,7 @@ export default function AddIngredientToRecipeForm2(props) {
     selectedIngredientToEdit,
     handleEditIngredientButton,
     ingredients,
+    disableButton,
   } = props;
 
   return (
@@ -32,17 +32,17 @@ export default function AddIngredientToRecipeForm2(props) {
         {selectedIngredientToEdit === 0 ? (
           <button
             type="button"
-            className="h-10 w-10 bg-white ml-2 mr-2 rounded-full flex flex-row items-center justify-center disabled:bg-cz1"
+            className="h-10 w-10 bg-white ml-2 mr-2 rounded-full flex flex-row items-center justify-center disabled:text-cz1"
             onClick={handleAddIngredientButton}
-            disabled={false}>
+            disabled={disableButton}>
             <FilePlus size={28} />
           </button>
         ) : (
           <button
             type="button"
-            className="h-10 w-10 bg-white ml-2 mr-2 rounded-full flex flex-row items-center justify-center disabled:bg-cz1"
+            className="h-10 w-10 bg-white ml-2 mr-2 rounded-full flex flex-row items-center justify-center disabled:text-cz1"
             onClick={handleEditIngredientButton}
-            disabled={false}>
+            disabled={disableButton}>
              <ArrowFatLineRight size={28} />
           </button>
         )}

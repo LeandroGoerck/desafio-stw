@@ -19,6 +19,19 @@ function Recipes() {
     descricaoReceita: "",
   });
 
+  const [disableButton, setDisableButton] = useState(true);
+
+  useEffect(() => {
+    if (
+      form.codigoReceita.length >= 3 &&
+      form.descricaoReceita.length >= 3
+    ) {
+      setDisableButton(false);
+    } else {
+      setDisableButton(true);
+    }
+  }, [form])
+
   const handleChanges = (e) => {
     const { name, value } = e.target;
 
@@ -71,6 +84,7 @@ function Recipes() {
               inputDescriptionValue={form.descricaoReceita}
               handleChanges={handleChanges}
               handleAddButton={handleAddButton}
+              disableButton={disableButton}
             />
             {recipes && (
               <div className="h-full w-full bg-white flex flex-col items-center">
