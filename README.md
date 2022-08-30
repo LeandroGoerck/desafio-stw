@@ -236,12 +236,13 @@ Para rodar o projeto, você vai precisar instalar as seguintes ferramentas:
 A aplicação WEB possui três telas, e é possível navegar por elas através da barra de navegação.
 Os botões RECEITAS, INGREDIENTES e CRIAÇÃO DE RECEITA navegam por essas três telas. 
 
-A primeira tela a ser preenchida pelo usuário é de ingredientes, onde serão cadastrados os ingredientes utilizados na fabricação das farinhas. Para isso, basta digitar o código e a descrição do ingrediente e clicar no botão de adicionar. A imagem abaixo ilustra a tela de cadastro de ingredientes:
+A primeira tela a ser preenchida pelo usuário é a de ingredientes, onde serão cadastrados os ingredientes utilizados na fabricação das farinhas. Para isso, basta digitar o código e a descrição do ingrediente e clicar no botão de adicionar.
+Para editar um ingrediente basta clicar no botão do lápis, os campos de edição aparecem na mesma linha da tabela. Para excluir um ingrediente, basta clicar no botão da lixeira. A imagem abaixo ilustra a tela de cadastro de ingredientes:
 
   ![Cadastro de ingredientes](./imagens/ingredientes.png)
 
-Em seguida, para criar uma nova receita, clique no botão CRIAÇÃO DE RECEITA na barra de navegação. Aqui o usuário pode selecionar os ingredientes e a quantidade em kg a ser adicionada na receita. Para salvar a receita no banco de dados, o código e a descrição da receita devem ser preenchidos. A figura abaixo ilustra a tela de cadastro de receitas:
+Em seguida, para criar uma nova receita, clique no botão CRIAÇÃO DE RECEITA na barra de navegação. Aqui o usuário pode selecionar os ingredientes e a quantidade em kg a ser adicionada na receita. Para salvar a receita no banco de dados, o código e a descrição da receita devem ser preenchidos. A figura abaixo ilustra a tela de criação de receitas:
   ![Criação de receitas](./imagens/criacao_de_receita.png)
 
-Por fim, para visualizar todas as receitas criadas, basta clicar no botão RECEITAS. Nessa tela, cada receita possui um botão para editar e outro para excluir a mesma. A figura abaixo ilustra a tela de visualização de receitas:
+Por fim, para gerenciar todas as receitas criadas, basta clicar no botão RECEITAS. Nessa tela, alem de ser possivel criar uma receita nova, cada receita possui um botão para editar e outro para excluir a mesma. A figura abaixo ilustra a tela de visualização de receitas:
   ![Visualização da lista de receitas](./imagens/receitas.png)
