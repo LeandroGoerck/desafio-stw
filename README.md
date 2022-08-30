@@ -1,16 +1,11 @@
 # Desafio-STW
-Criar o frontend e o backend para criação e edição de listas de receitas
-
----
-
-# Descritivo do desafio
 A produção de uma fábrica de farinhas trabalha diariamente com diversos tipos de receitas.
 Essas receitas possuem um conjunto de ingredientes que devem ser consumidos na ordem em que foram salvos.
 Atualmente as receitas já estão organizadas em planilhas do Excel e são impressas sempre que uma receita é finalizada.
-O desafio é implementar uma aplicação web para cadastro de receitas para eliminar a impressão em papel e facilitar o gerenciamento das mesmas.
+O desafio é implementar o frontend e backend de uma aplicação web para cadastro de receitas para eliminar a impressão em papel e facilitar o gerenciamento das mesmas.
 
 
-Com as seguintes funcionalidades:
+A aplicação deve ter as seguintes funcionalidades:
 1. Receitas
   - [x] Listar receitas
   - [x] Listar uma determinada receita com seus respectivos ingredientes
@@ -29,7 +24,6 @@ Com as seguintes funcionalidades:
 # Sumário
 
 - [Status](#status)
-- [Licença](#licença)
 - [Habilidades desenvolvidas](#habilidades-desenvolvidas)
 - [Tecnologias utilizadas](#tecnologias-utilizadas)
 - [Organização e Estruturação do Projeto](#organização-e-estruturação-do-projeto)
@@ -39,17 +33,13 @@ Com as seguintes funcionalidades:
   - [Rodando no servidor local](#rodando-no-servidor-local)
 - [Orientações de como utilizar a página WEB](#orientações-de-como-utilizar-a-página-WEB)
 
+
   ---
 
 # Status
 
-Este projeto está em desenvolvimento.
+Este projeto está em concluido, porém sugestões de melhorias são sempre bem vindas!
 
----
-
-# Licença
-
-Este projeto está sob a licença [MIT](https://pt.wikipedia.org/wiki/Licen%C3%A7a_MIT).
 ---
 
 # Habilidades desenvolvidas
