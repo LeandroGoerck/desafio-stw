@@ -34,15 +34,11 @@ Com as seguintes funcionalidades:
 - [Tecnologias utilizadas](#tecnologias-utilizadas)
 - [Organização e Estruturação do Projeto](#organização-e-estruturação-do-projeto)
 - [Organização e Estruturação do Banco de Dados](#organização-e-estruturação-do-banco-de-dados)  
-O banco de dados utilizado está ilustrado na figura abaixo:
-  ![Planejamento do Banco](./imagens/planejamento_banco.png)
-
 - [Pré-requisitos](#pré-requisitos)
   - [Ferramentas necessárias](#ferramentas-necessárias)
   - [Rodando no servidor local](#rodando-no-servidor-local)
-  - [Quer contribuir com o projeto?](#quer-contribuir-com-o-projeto)
-- [Orientações detalhadas de como utilizar a página WEB](#orientações-web)
-- [Orientações detalhadas de como utilizar a API](#orientações-detalhadas-de-como-utilizar)
+- [Orientações detalhadas de como utilizar a página WEB](#orientações-detalhadas-de-como-utilizar-a-página-WEB)
+- [Orientações detalhadas de como utilizar a API](#orientações-detalhadas-de-como-utilizar-a-API)
   - [Ingredients](#ingredients)
     - [Ingredients create](#ingredients-create)
     - [Ingredients getAll](#ingredients-getall)
@@ -195,6 +191,11 @@ O projeto está organizado e estruturado da seguinte maneira:
 ├── README.md
 ```
 ---
+## Organização e Estruturação do Banco de Dados  
+O banco de dados utilizado está ilustrado na figura abaixo:
+  ![Planejamento do Banco](./imagens/planejamento_banco.png)
+
+---
 # Pré-requisitos
 
 ## Ferramentas necessárias
@@ -208,21 +209,21 @@ Para rodar o projeto, você vai precisar instalar as seguintes ferramentas:
 
  - Clone do Projeto e instale as dependências
 
-    ### Clone este repositório
+    - Clone este repositório
     ```bash
     git clone git@github.com:LeandroGoerck/desafio-stw.git
     ```
 
-    ### Acesse a pasta do projeto no terminal/cmd
+    - Acesse a pasta do projeto no terminal/cmd
     ```bash
     cd desafio-stw
     ```
 
-    ### Instale as dependências do backend e do frontend
+    - Instale as dependências do backend e do frontend
     ```bash
     cd backend/ && npm install && cd ../frontend && npm install
     ```
-    ### Configure as variaveis de ambiente
+    - Configure as variaveis de ambiente
     No ubuntu
  - Renomeie o arquivo `example.env` para `.env` ou crie um novo arquivo chamado `.env` na raiz do projeto de backend com as seguintes configurações:
     - DATABASE_URL="mysql://root:1234@localhost:3306/banco_receitas"
@@ -231,26 +232,56 @@ Para rodar o projeto, você vai precisar instalar as seguintes ferramentas:
     ```bash
     set DATABASE_URL="mysql://root:1234@localhost:3306/banco_receitas"
     ```  
-    ### Suba uma instância do banco de dados mysql:
+    - Suba uma instância do banco de dados mysql:
     Utilizando um container docker:
     ```bash
     docker run -p 3306:3306 --name mysql_80 -e MYSQL_ROOT_PASSWORD=1234 -d mysql:8 mysqld --default-authentication-plugin=mysql_native_password
     ```
 
-    ### Rode as migrations do prisma para criar as tabelas:
+    - Rode as migrations do prisma para criar as tabelas:
     ```bash
     npx prisma migrate dev --name init
     ```
 
  - Inicie o sistema:
 
-    ### Inicie o backend
+    - Inicie o backend
     ```bash
     cd backend && npm start
     ```
-    ### Inicie o frontend
+    - Inicie o frontend
     ```bash
     cd frontend && npm start
     ```
     Abra em qualquer navegador http://localhost:3000/
-    
+
+---
+# Orientações detalhadas de como utilizar a página WEB
+
+A ser implementado.
+
+---
+# Orientações detalhadas de como utilizar a API
+A ser implementado.
+  ### Ingredients
+    - [Ingredients create](#ingredients-create)
+    - [Ingredients getAll](#ingredients-getall)
+    - [Ingredients getById](#ingredients-getbyid)
+    - [Ingredients updateById](#ingredients-updatebyid)
+    - [Ingredients deleteById](#ingredients-deletebyid)
+  ### Recipes
+    - [Recipes create](#recipes-create)
+    - [Recipes getAll](#recipes-getall)
+    - [Recipes getById](#recipes-getbyid)
+    - [Recipes updateById](#recipes-updatebyid)
+    - [Recipes deleteById](#recipes-deletebyid)
+    - [RecipesIngredient](#recipes-ingredient)
+    - [RecipesIngredient addIngredient](#recipes-ingredient-addingredient)
+    - [RecipesIngredient removeIngredient](#recipes-ingredient-removeingredient)
+    - [RecipesIngredient updateIngredientById](#recipes-ingredient-updateingredientbyId)
+    - [RecipesIngredient swapIngredients](#recipes-ingredient-swapingredients)
+    - [RecipesCreate createOrUpdate](#recipes-create-createorupdate)
+
+## Contribuição
+## Agradecimentos
+## Autor
