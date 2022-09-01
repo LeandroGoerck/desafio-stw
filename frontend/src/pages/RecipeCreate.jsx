@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import NavBar from "../components/NavBar";
-import RecipeWithIngredientsTable2 from "../components/RecipeWithIngredientsTable2";
+import RecipeWithIngredientsTable from "../components/RecipeWithIngredientsTable";
 import api from "../helpers/request";
 import { useEffect } from "react";
-import AddIngredientToRecipeForm2 from "../components/AddIngredientToRecipeForm2";
+import AddIngredientToRecipeForm from "../components/AddIngredientToRecipeForm";
 import { FloppyDisk } from "phosphor-react";
 import { useParams } from "react-router-dom";
 
@@ -207,7 +207,7 @@ export default function RecipeCreate() {
           <div className="mt-14 mb-14  w-full lg:w-2/3 flex flex-col items-center">
             <span>CRIAÇÃO E EDIÇÃO DE RECEITA COMPLETA</span>
             <span>ID: {recipeId}</span>
-            <AddIngredientToRecipeForm2
+            <AddIngredientToRecipeForm
               ingredients={ingredients}
               recipeId={recipeId}
               form={form}
@@ -220,7 +220,7 @@ export default function RecipeCreate() {
 
             <div className="h-full w-full bg-white flex flex-col items-center">
 
-              <RecipeWithIngredientsTable2
+              <RecipeWithIngredientsTable
                 inputRecipeCodeName="codigoReceita"
                 inputRecipeDescription="descricaoReceita"
                 handleRecipeChanges={handleRecipeChanges}
