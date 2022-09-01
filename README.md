@@ -62,6 +62,7 @@ Este projeto está em concluido, porém sugestões de melhorias são sempre bem 
 - [React](https://create-react-app.dev/docs/getting-started)
 - [Tailwindcss](https://tailwindcss.com/docs/guides/create-react-app)
 - [Prisma](https://www.prisma.io/docs/getting-started/quickstart)
+- [Docker](https://www.docker.com/)
 - [Postman](https://www.postman.com/)
 
 ---
@@ -172,6 +173,7 @@ O banco de dados utilizado está ilustrado na figura abaixo:
 Para rodar o projeto, você vai precisar instalar as seguintes ferramentas:
  - [Git](https://git-scm.com);
  - [Node.js >= 14.17](https://nodejs.org/en/);
+ - [Docker](https://www.docker.com/)
  - Um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/) ou outro de sua preferência;
 
  ## Rodando no servidor local
@@ -180,7 +182,7 @@ Para rodar o projeto, você vai precisar instalar as seguintes ferramentas:
 
     - Clone este repositório
     ```bash
-    git clone git@github.com:LeandroGoerck/desafio-stw.git
+    git clone https://github.com/LeandroGoerck/desafio-stw.git
     ```
 
     - Acesse a pasta do projeto no terminal/cmd
@@ -218,7 +220,7 @@ Para rodar o projeto, você vai precisar instalar as seguintes ferramentas:
     ```bash
     cd backend && npm start
     ```
-    - Inicie o frontend
+    - Em outro terminal, inicie o frontend
     ```bash
     cd frontend && npm start
     ```
