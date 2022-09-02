@@ -1,8 +1,6 @@
-import IAddIngredient from "../interfaces/IAddIngredient";
 import { prismaClient } from "../database/prismaClient";
 import ICreateRecipe from "../interfaces/ICreateRecipe";
 import ERR from "./errors";
-import ISwapIngredient from "../interfaces/ISwapIngredient";
 import ICreateOrUpdateRecipe from "../interfaces/ICreateOrUpdateRecipe";
 
 export default class RecipesService {
