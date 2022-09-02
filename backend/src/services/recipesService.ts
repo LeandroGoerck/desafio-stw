@@ -39,7 +39,6 @@ export default class RecipesService {
   };
 
   public getById = async (id: string) => {
-    console.log(id);
     const recipeFound = await prismaClient.receitas.findFirst({
       where: { id: parseInt(id) },
       include: {

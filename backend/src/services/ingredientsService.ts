@@ -20,7 +20,6 @@ export default class IngredientsService {
   };
 
   public getById = async (id: string) => {
-    console.log(id);
     const ingredientFound = await prismaClient.ingredientes.findFirst({
       where: { id: parseInt(id) },
     });
@@ -28,7 +27,6 @@ export default class IngredientsService {
   };
 
   public updateById = async (id: string, ingredient: IIngredient) => {
-    console.log("id = ", id);
     const foundIngredient = this.getById(id);
     if (!foundIngredient) throw ERR.thisIdDoesNotExist;
     const { codigoIngrediente, descricaoIngrediente } = ingredient;
@@ -43,7 +41,6 @@ export default class IngredientsService {
   };
 
   public deleteById = async (id: string) => {
-    console.log("id = ", id);
     const deletedData = await prismaClient.ingredientes.delete({
       where: { id: parseInt(id) },
     });
