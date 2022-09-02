@@ -1,7 +1,5 @@
-
-
-import { NextFunction, request, Request, Response } from 'express';
-import IngredientsService from '../services/ingredientsService';
+import { NextFunction, Request, Response } from "express";
+import IngredientsService from "../services/ingredientsService";
 
 export default class IngredientsController {
   public service = new IngredientsService();
@@ -9,23 +7,26 @@ export default class IngredientsController {
   public create = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { codigoIngrediente, descricaoIngrediente } = req.body;
-      const createdIngredients = await this.service.create({codigoIngrediente, descricaoIngrediente});
+      const createdIngredients = await this.service.create({
+        codigoIngrediente,
+        descricaoIngrediente,
+      });
 
       return res.status(201).json(createdIngredients);
     } catch (error) {
       next(error);
     }
-  }
+  };
 
   public getAll = async (_req: Request, res: Response, next: NextFunction) => {
     try {
-         const ingredientsData = await this.service.getAll();
+      const ingredientsData = await this.service.getAll();
 
-        return res.status(200).json(ingredientsData);
+      return res.status(200).json(ingredientsData);
     } catch (error) {
       next(error);
     }
-  }
+  };
 
   public getById = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -36,21 +37,32 @@ export default class IngredientsController {
     } catch (error) {
       next(error);
     }
-  }
+  };
 
-  public updateById = async (req: Request, res: Response, next: NextFunction) => {
+  public updateById = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     try {
       const { id } = req.params;
       const { codigoIngrediente, descricaoIngrediente } = req.body;
-      const updatedIngredient = await this.service.updateById(id as string, {codigoIngrediente, descricaoIngrediente});
+      const updatedIngredient = await this.service.updateById(id as string, {
+        codigoIngrediente,
+        descricaoIngrediente,
+      });
 
       return res.status(200).json(updatedIngredient);
     } catch (error) {
       next(error);
     }
-  }
+  };
 
-  public deleteById = async (req: Request, res: Response, next: NextFunction) => {
+  public deleteById = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     try {
       const { id } = req.body;
       const deletedData = await this.service.deleteById(id as string);
@@ -59,5 +71,5 @@ export default class IngredientsController {
     } catch (error) {
       next(error);
     }
-  }
+  };
 }
