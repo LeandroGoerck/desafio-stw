@@ -97,67 +97,6 @@ export default class RecipesService {
     }
   };
 
-  public addIngredient = async (ingredient: IAddIngredient) => {
-    const {
-      receitasCodigoReceita,
-      ingredientesCodigoIngrediente,
-      previsto,
-      ordem,
-    } = ingredient;
-    const ingredientData = await prismaClient.receitasTemIngredientes.create({
-      data: {
-        receitasCodigoReceita,
-        ingredientesCodigoIngrediente,
-        previsto,
-        ordem,
-      },
-    });
-    return { ingredientData };
-  };
-
-  public removeIngredient = async (id: number) => {
-    const removedIngredient = await prismaClient.receitasTemIngredientes.delete(
-      {
-        where: { id },
-      }
-    );
-    return { removedIngredient };
-  };
-
-  public updateIngredient = async (id: number, ingredient: IAddIngredient) => {
-    const { receitasCodigoReceita, ingredientesCodigoIngrediente, previsto } =
-      ingredient;
-    const ingredientData = await prismaClient.receitasTemIngredientes.update({
-      where: { id },
-      data: {
-        receitasCodigoReceita,
-        ingredientesCodigoIngrediente,
-        previsto,
-      },
-    });
-    return { ingredientData };
-  };
-
-  public swapIngredients = async (ingredients: Array<ISwapIngredient>) => {
-    const updateFirst = prismaClient.receitasTemIngredientes.update({
-      where: { id: ingredients[0].id },
-      data: {
-        ordem: ingredients[0].ordem,
-      },
-    });
-
-    const updateSecond = prismaClient.receitasTemIngredientes.update({
-      where: { id: ingredients[1].id },
-      data: {
-        ordem: ingredients[1].ordem,
-      },
-    });
-
-    await prismaClient.$transaction([updateFirst, updateSecond]);
-
-    return [updateFirst, updateSecond];
-  };
-
   public createOrUpdate = async (id: number, recipe: ICreateOrUpdateRecipe) => {
     const { codigoReceita, descricaoReceita, ingredientes } = recipe;
 
