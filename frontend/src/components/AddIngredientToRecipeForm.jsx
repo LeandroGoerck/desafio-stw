@@ -1,25 +1,17 @@
 import { ArrowFatLineRight, FilePlus } from "phosphor-react";
-import React, { useEffect, useState } from "react";
-import api from "../helpers/request";
+import React from "react";
 import IngredientSelect from "../components/IngredientSelect"
 
-export default function AddIngredientToRecipeForm(props) {
-  const [ingredients, setIngredients] = useState([]);
+export default function AddIngredientToRecipeForm2(props) {
   const {
     handleChanges,
     handleAddIngredientButton,
     form,
     selectedIngredientToEdit,
     handleEditIngredientButton,
+    ingredients,
     disableButton,
   } = props;
-
-
-  useEffect(() => {
-    api.get("/ingredients").then(({ data }) => {
-      setIngredients(data.ingredientsData);
-    });
-  }, []);
 
   return (
     <form className="flex flex-row ">

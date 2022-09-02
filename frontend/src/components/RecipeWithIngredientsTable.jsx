@@ -8,11 +8,11 @@ import {
 
 export default function RecipeWithIngredientsTable(props) {
   const handleViewEditButton = (
-    recipeIngredientId,
+    recipeIngredientOrdem,
     editRecipeIngredientData
   ) => {
     if (editRecipeIngredient === 0) {
-      setRecipeEditIngredient(recipeIngredientId);
+      setRecipeEditIngredient(recipeIngredientOrdem);
 
       setFormValue((prevState) => ({
         ...prevState,
@@ -28,7 +28,11 @@ export default function RecipeWithIngredientsTable(props) {
     setRecipeEditIngredient,
     setFormValue,
     handleSwapIngredientsButton,
+    ingredients,
+    inputRecipeCodeName,
+    handleRecipeChanges,
     inputRecipeCodeValue,
+    inputRecipeDescription,
     inputRecipeDescriptionValue,
   } = props;
   return (
@@ -36,20 +40,28 @@ export default function RecipeWithIngredientsTable(props) {
       <thead className="border-2 border-az3 ">
         <tr>
           <th>
-            <div className="flex flex-row items-center mt-2 mb-2">
+            <div className="flex flex-row items-center">
               <div className="ml-5 flex flex-row items-center">
-                <div className="text-lg font-semibold flex flex-row items-center">Receita</div>
-                <div className="h-8 pl-1 w-20 bg-slate-100 rounded-sm ml-2 flex flex-row items-center">
-                  {inputRecipeCodeValue}
-                </div>
+                <span className="text-lg font-semibold">Receita</span>
+                <input
+                  type="input"
+                  name={inputRecipeCodeName}
+                  placeholder="Código"
+                  onChange={handleRecipeChanges}
+                  value={inputRecipeCodeValue}
+                  className="m-2 h-8 pl-1 w-20 bg-slate-100 rounded-sm"></input>
               </div>
               <div className="flex flex-row items-center">
-                <div className="ml-5 hidden text-lg font-semibold md:flex flex-row items-center">
+                <span className="hidden md:inline-block text-lg font-semibold">
                   Descrição
-                </div>
-                <div className="h-8 pl-1 bg-slate-100 rounded-sm ml-2 w-60 flex flex-row items-center">
-                  {inputRecipeDescriptionValue}
-                </div>
+                </span>
+                <input
+                  type="input"
+                  name={inputRecipeDescription}
+                  placeholder="Descrição"
+                  onChange={handleRecipeChanges}
+                  value={inputRecipeDescriptionValue}
+                  className="h-8 pl-1 bg-slate-100 rounded-sm ml-2"></input>
               </div>
             </div>
           </th>
@@ -83,7 +95,7 @@ export default function RecipeWithIngredientsTable(props) {
               <tr
                 key={`${ing.id}${index}`}
                 className={`${
-                  editRecipeIngredient === ing.id && "bg-cz1"
+                  editRecipeIngredient === ing.ordem && "bg-cz1"
                 } text-center items-center border`}>
                 <td>
                   <span className="pt-2 pb-2">{ing.ordem}</span>
@@ -91,12 +103,18 @@ export default function RecipeWithIngredientsTable(props) {
 
                 <td className="flex flex-box justify-center">
                   <span className="pt-2 pb-2">
-                    {ing.ingredientes.codigoIngrediente}
+                    {ing.ingredientesCodigoIngrediente}
                   </span>
                 </td>
 
                 <td className="pt-2 pb-2">
-                  {ing.ingredientes.descricaoIngrediente}
+                  {
+                    ingredients.find(
+                      (i) =>
+                        i.codigoIngrediente ===
+                        ing.ingredientesCodigoIngrediente
+                    ).descricaoIngrediente
+                  }
                 </td>
 
                 <td>
@@ -106,20 +124,13 @@ export default function RecipeWithIngredientsTable(props) {
                 <td className="pt-2 pb-2 flex flex-row justify-end">
                   <button
                     type="button"
-                    className="h-fit w-fit ml-2 mr-2 disabled:text-cz1 hover:text-az1"
+                    className="h-fit w-fit ml-2 mr-2 disabled:text-cz1 hover:text-az1 hidden sm:block"
                     disabled={index === 0}
                     onClick={() => {
-                      const ingredients = [
-                        {
-                          id: ing.id,
-                          ordem: recipeIngredients[index - 1].ordem,
-                        },
-                        {
-                          id: recipeIngredients[index - 1].id,
-                          ordem: ing.ordem,
-                        },
-                      ];
-
+                      const ingredients = {
+                        actual: index + 1,
+                        target: index,
+                      };
                       handleSwapIngredientsButton(ingredients);
                     }}>
                     <ArrowFatLineUp size={22} />
@@ -127,32 +138,24 @@ export default function RecipeWithIngredientsTable(props) {
 
                   <button
                     type="button"
-                    className="h-fit w-fit ml-2 mr-2 disabled:text-cz1 hover:text-az1"
+                    className="h-fit w-fit ml-2 mr-2 disabled:text-cz1 hover:text-az1 hidden sm:block"
                     disabled={index === recipeIngredients.length - 1}
                     onClick={() => {
-                      const ingredients = [
-                        {
-                          id: ing.id,
-                          ordem: recipeIngredients[index + 1].ordem,
-                        },
-                        {
-                          id: recipeIngredients[index + 1].id,
-                          ordem: ing.ordem,
-                        },
-                      ];
-
+                      const ingredients = {
+                        actual: index + 1,
+                        target: index + 2,
+                      };
                       handleSwapIngredientsButton(ingredients);
                     }}>
                     <ArrowFatLineDown size={22} />
                   </button>
 
-                  {ing.id === editRecipeIngredient ? (
+                  {ing.ordem === editRecipeIngredient ? (
                     <button
                       type="button"
                       className="h-fit w-fit ml-2 mr-2 hover:text-az1"
                       onClick={() => {
                         setRecipeEditIngredient(0);
-                        // handleEditButton(ing.id);
                       }}>
                       <RadioButton size={22} weight="fill" />
                     </button>
@@ -161,9 +164,9 @@ export default function RecipeWithIngredientsTable(props) {
                       type="button"
                       className="h-fit w-fit ml-2 mr-2 hover:text-az1"
                       onClick={() =>
-                        handleViewEditButton(ing.id, {
+                        handleViewEditButton(ing.ordem, {
                           ingredientesCodigoIngrediente:
-                            ing.ingredientes.codigoIngrediente,
+                            ing.ingredientesCodigoIngrediente,
                           previsto: ing.previsto,
                           ordem: ing.ordem,
                         })
@@ -175,7 +178,7 @@ export default function RecipeWithIngredientsTable(props) {
                   <button
                     type="button"
                     className="h-fit w-fit ml-1 mr-2 hover:text-az1"
-                    onClick={() => handleRemoveIngredientButton(ing.id)}>
+                    onClick={() => handleRemoveIngredientButton(ing.ordem)}>
                     <Trash size={22} />
                   </button>
                 </td>
