@@ -113,18 +113,12 @@ O projeto está organizado e estruturado da seguinte maneira:
 │   ├── package-lock.json
 │   ├── postcss.config.js
 │   ├── public
-│   │   ├── favicon.ico
 │   │   ├── index.html
 │   │   ├── manifest.json
-│   │   ├── robots.txt
 │   │   └── stw.svg
-│   ├── README.md
 │   ├── src
-│   │   ├── App.css
-│   │   ├── App.js
-│   │   ├── App.test.js
+│   │   ├── App.jsx
 │   │   ├── components
-│   │   │   ├── AddIngredientToRecipeForm2.jsx
 │   │   │   ├── AddIngredientToRecipeForm.jsx
 │   │   │   ├── CodeAndDescriptionForm.jsx
 │   │   │   ├── IngredientSelect.jsx
@@ -132,25 +126,20 @@ O projeto está organizado e estruturado da seguinte maneira:
 │   │   │   ├── NavBar.jsx
 │   │   │   ├── RecipesForm.jsx
 │   │   │   ├── RecipesTable.jsx
-│   │   │   ├── RecipeWithIngredientsTable2.jsx
 │   │   │   └── RecipeWithIngredientsTable.jsx
 │   │   ├── context
-│   │   │   ├── GlobalContext.js
+│   │   │   ├── GlobalContext.jsx
 │   │   │   └── GlobalProvider.jsx
 │   │   ├── helpers
-│   │   │   └── request.js
+│   │   │   └── request.jsx
 │   │   ├── index.css
-│   │   ├── index.js
-│   │   ├── logo.svg
+│   │   ├── index.jsx
 │   │   ├── pages
 │   │   │   ├── Ingredients.jsx
 │   │   │   ├── RecipeCreate.jsx
-│   │   │   ├── RecipeDetails.jsx
 │   │   │   └── Recipes.jsx
-│   │   ├── reportWebVitals.js
-│   │   ├── routes
-│   │   │   └── index.js
-│   │   └── setupTests.js
+│   │   └── routes
+│   │       └── index.jsx
 │   └── tailwind.config.js
 ├── imagens
 │   ├── criacao_de_receita.png
