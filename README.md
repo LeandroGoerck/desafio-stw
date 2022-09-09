@@ -37,7 +37,7 @@ A aplicação deve ter as seguintes funcionalidades:
 
 # Status
 
-Este projeto está em concluido, porém sugestões de melhorias são sempre bem vindas!
+Este projeto está concluido, porém sugestões de melhorias são sempre bem vindas!
 
 ---
 
